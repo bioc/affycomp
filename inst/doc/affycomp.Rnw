@@ -94,7 +94,7 @@ summary statistics in the image report:
 \begin{Sinput}
 R> library(affycomp) ##load the affy package
 R> d <- read.dilution("dilfilename.csv")
-R> s <- read.spikein("sifilename.csv")
+R> s <- read.dilution("sifilename.csv")
 R> rma.assessment <- affycomp(d,s,method.name="RMA")
 \end{Sinput}
 
