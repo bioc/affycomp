@@ -1,4 +1,5 @@
-read.spikein <- function(filename,cdfName=c("hgu95a","hgu133a")){
+read.spikein <- function(filename,cdfName=c("hgu95a","hgu133a"),
+                         remove.xhyb=TRUE){
 #######################################################
 ###prep spike in exprSet
 #######################################################
@@ -23,6 +24,7 @@ read.spikein <- function(filename,cdfName=c("hgu95a","hgu133a")){
   s <- s[,rownames(pData(pd))]
   s <- new("exprSet",exprs=as.matrix(s),phenoData=pd)
   s <- exprset.log(s) ##take log
+  if(remove.xhyb & cdfName=="hgu133a") s <- remove.hgu133a.xhyb(s)
   return(s)
 }
 

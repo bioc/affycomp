@@ -1,6 +1,6 @@
 affycompPlot <- function(...,assessment.list=NULL,method.names=NULL,
                          figure1.xlim=c(-4,15),figure1.ylim=c(-10,12),
-                         figure1b.xlim=c(-4,15),figure1b.ylim=c(-6,5),
+                         figure1b.xlim=c(-2,14),figure1b.ylim=c(-6,5),
                          figure6a.xlim=c(-12,12),figure6a.ylim=c(-12,12),
                          figure6b.xlim=c(-3,3),figure6b.ylim=c(-6,6)){
   if(is.null(assessment.list)) l<-list(...) else l <- assessment.list
@@ -129,12 +129,25 @@ affycomp.figure3 <- function(l,main="Figure 3"){
 }
 
 ##obersved expression v nominal expression
-affycomp.figure4a <- function(l,main="Figure 4a"){
+affycomp.figure4a <- function(l,main="Figure 4a",equal.lims=FALSE){
   x <- l$plotx
   y <- l$ploty
+  XLIM <- range(x,na.rm=TRUE,finite=TRUE)
+  YLIM <- range(y,na.rm=TRUE,finite=TRUE)
+
+  if(equal.lims){
+    ranges <- c(diff(XLIM),diff(YLIM))
+    slope <- max(ranges)/min(ranges)
+    if(diff(XLIM)<diff(YLIM))
+      XLIM <- mean(XLIM) + slope*(XLIM-mean(XLIM))
+    else
+      YLIM <- mean(YLIM) + slope*(YLIM-mean(YLIM))
+  }
+
   cols <- as.numeric(as.factor(names(x)))
-  plot(x,y,col=cols,xlab="Nominal concentration (in picoMolar)", ylab="Observed expression",main=main,pch=16)
+  plot(x,y,col=cols,xlab="Nominal concentration (in picoMolar)", ylab="Observed expression",main=main,pch=16,xlim=XLIM,ylim=YLIM)
   lines(l$linex,l$liney,lwd=3)
+  if(equal.lims) lines(XLIM,YLIM,lwd=2,lty=2)
 }
 
 ##slope vs concentration

@@ -27,33 +27,38 @@
 library(affycomp)
 @
 
+In this report only assessment using the {\bf HGU95} spike-In experiment 
+are presetned.  
+
+
+
 <<echo=F>>=
 for(i in 1:nrow(affycomp.info))
   cat(affycomp.info[i,1],affycomp.info[i,2],"\n")
 @ 
 
+<<echo=F>>=
+cat("Overall signal to ratio assessment:\n")
+tableOverallSNR(spikein.assessment2)
+  
+cat("\nExpected Rank (out of 12626) for genes with fold change of 2\nwhen all other genes are not differentially expressed\nstratified by nominal concentration.\n")
+tableRanks(spikein.assessment2)
 
-Table:
-<<>>=
-tableAll(tmp.assessment)
+cat("\nTable 1 for Spike-in Data:\n")
+tableAll(spikein.assessment)
+cat("\nTable 2 for Spike-in Data:\n")
+tableAll(spikein.assessment2)
 @ 
 
-
-Overall signal to ratio assessment:
-<<>>=
-tableOverallSNR(tmp.assessment2)
-@ 
-Expected Rank (out of 12626) for genes with fold change of 2 when all
-other genes are not differentially expressed stratified by nominal
-concentration. 
-<<>>=
-tableLS(tmp.assessment2)
+<<echo=F>>=
+cat("Table for Dilution Data:\n")
+tableAll(dilution.assessment)
 @ 
 
 \begin{figure}[htbp]
 \begin{center}
 <<fig=TRUE,echo=F>>=
-affycompPlot(tmp.assessment$MA)
+affycompPlot(spikein.assessment$MA)
 @
 \end{center}
 {Figure 1: The MA plot shows log fold change as a function of
@@ -69,8 +74,8 @@ affycompPlot(tmp.assessment$MA)
 
 \begin{figure}[htbp]
 \begin{center}
-<<fig=TRUE,echo=F>>=
-affycomp.figure1b(tmp.assessment2$MA2)
+<<fig=TRUE,echo=FALSE>>=
+affycomp.figure1b(spikein.assessment2$MA2)
 @
 \end{center}
 {Figure 1b: The MA plot shows log fold change as a function of
@@ -84,9 +89,8 @@ affycomp.figure1b(tmp.assessment2$MA2)
     expressed, only genes with small nominal fold changes are
     shown. The colors represent 
     four different groups: nominal concentration of genes being compared
-    less than or equal to 1 picoMolar (red), between 2 and 8 picoMolar
-    (orange), between 16 and 
-    64 picoMolar (green), greater than 128 picoMolar (blue).
+    less than or equal to 2 picoMolar (blue), between 4 and 32 picoMolar
+    (green), greater than or equal to 64 picoMolar (blue).
     Non-differentially expressed genes with observed fold 
     changes larger than 2 are plotted in red. All other probesets are
     represented with black dots.}
@@ -94,8 +98,8 @@ affycomp.figure1b(tmp.assessment2$MA2)
 
 \begin{figure}[htbp]
 \begin{center}
-<<echo=F,fig=TRUE>>=
-affycomp.figure2(tmp.assessment$Dilution)
+<<echo=FALSE,fig=TRUE>>=
+affycomp.figure2(dilution.assessment)
 @
 \end{center}
   {Figure 2:  For each gene,
@@ -112,7 +116,7 @@ affycomp.figure2(tmp.assessment$Dilution)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure2b(tmp.assessment2$SpikeInSD)
+affycomp.figure2b(spikein.assessment2$SpikeInSD)
 @
 \end{center}
   {Figure 2b:  For each non-spiked-in gene in the 28 arrays used in
@@ -143,18 +147,18 @@ respectively. The rest are denoted with black.}
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure4a(tmp.assessment$Signal)
+affycomp.figure4a(tmp.assessment$Signal,equal.lims=TRUE)
 @
 \end{center}
 {Figure 4a) Average observed $log_2$ intensity plotted
     against nominal $log_2$ concentration for each spiked-in gene for
-    all arrays in  Affymetrix spike-In experiment.}
+    all arrays in  Affymetrix spike-In experiment. The dashed line has the ideal slope of 1.}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure4b(tmp.assessment$Dilution)
+affycomp.figure4b(dilution.assessment)
 @
 \end{center}
 {Figure 4b) For the GeneLogic
@@ -166,7 +170,7 @@ affycomp.figure4b(tmp.assessment$Dilution)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure4c(tmp.assessment2$LS)
+affycomp.figure4c(spikein.assessment2$LS)
 @
 \end{center}
 {Figure 4c) Using the 28 arrays of Figure 1b, we compute local
@@ -183,7 +187,7 @@ affycomp.figure4c(tmp.assessment2$LS)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5a(tmp.assessment$FC)
+affycomp.figure5a(spikein.assessment$FC)
 @
 \end{center}
   {Figure 5a) A typical identification rule for differential
@@ -198,7 +202,7 @@ affycomp.figure5a(tmp.assessment$FC)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5b(tmp.assessment$FC)
+affycomp.figure5b(spikein.assessment$FC)
 @
 \end{center}
   {Figure 5b) As 5a) but with
@@ -209,47 +213,37 @@ affycomp.figure5b(tmp.assessment$FC)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5c(tmp.assessment2$MA2)
+affycomp.figure5c(spikein.assessment2$MA2)
 @
 \end{center}
 {Figure 5c) As 5a) but for comparisons with both nominal concentrations less
-  than or equal to 1 picoMolar.}
+  than or equal to 2 picoMolar.}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5d(tmp.assessment2$MA2)
+affycomp.figure5d(spikein.assessment2$MA2)
 @
 \end{center}
 {Figure 5d) As 5a) but for comparisons with both nominal
-  concentrations between 2 and 8 picoMolar.}
+  concentrations between 4 and 32 picoMolar and nominal fold changes less or equal to 4.}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5e(tmp.assessment2$MA2)
+affycomp.figure5e(spikein.assessment2$MA2)
 @
 \end{center}
 {Figure 5e) As 5a) but for comparisons with both nominal
-  concentrations between 16 and 64 picoMolar.}
+  concentrations larger or equal to 64 and with nominal fold changes less than or equal to 4.}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5f(tmp.assessment2$MA2)
-@
-\end{center}
-{Figure 5f) As 5a) but for comparisons with both nominal
-  concentrations larger than 128 picoMolar.}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-<<echo=F,fig=TRUE>>=
-affycomp.figure6a(tmp.assessment$FC)
+affycomp.figure6a(spikein.assessment$FC)
 @
 \end{center}
   {Figure 6a) Observed log fold changes plotted against
@@ -262,7 +256,7 @@ affycomp.figure6a(tmp.assessment$FC)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure6b(tmp.assessment$FC)
+affycomp.figure6b(spikein.assessment$FC)
 @
 \end{center}
   {Figure 6b) Like a) but
@@ -272,3 +266,4 @@ affycomp.figure6b(tmp.assessment$FC)
 
 
 \end{document}
+

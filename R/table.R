@@ -28,8 +28,12 @@ tableAll <- function(...,assessment.list=NULL,method.names=NULL){
       if(tmp$what=="SpikeIn")
         tmp <- tmp[1:4]
       else{
-        tmp <- list(tmp)
-        names(tmp) <- tmp[[1]]$what
+        if(tmp$what=="SpikeIn2")
+          tmp <- tmp[1:3]
+        else{
+          tmp <- list(tmp)
+          names(tmp) <- tmp[[1]]$what
+        }
       }
     }
     l[[i]] <- tmp

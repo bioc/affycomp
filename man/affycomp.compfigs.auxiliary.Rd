@@ -8,11 +8,10 @@
 \alias{affycomp.compfig4c}
 \alias{affycomp.compfig5a}
 \alias{affycomp.compfig5b}
-\alias{affycomp.compfig5cdef}
+\alias{affycomp.compfig5cde}
 \alias{affycomp.compfig5c}
 \alias{affycomp.compfig5d}
 \alias{affycomp.compfig5e}
-\alias{affycomp.compfig5f}
 
 %- Also NEED an `\alias' for EACH other topic documented here.
 \title{Auxiliary functions to create comparitive Figures}
@@ -44,9 +43,9 @@ affycomp.compfig5a(l, method.names = as.character(1:length(l)),
 affycomp.compfig5b(l, method.names = as.character(1:length(l)),
                   add.legend = TRUE, main = "Figure 5b", maxfp=100)
 
-affycomp.compfig5cdef(l, method.names = as.character(1:length(l)),
+affycomp.compfig5cde(l, method.names = as.character(1:length(l)),
                   add.legend = TRUE, main = "Figure 5c", maxfp=100,
-                  type=c("low","medlow","medhigh","high")
+                  type=c("low","med","high")
 
 affycomp.compfig5c(l, method.names = as.character(1:length(l)),
                   add.legend = TRUE, main = "Figure 5c", maxfp=100)
@@ -56,10 +55,6 @@ affycomp.compfig5d(l, method.names = as.character(1:length(l)),
 
 affycomp.compfig5e(l, method.names = as.character(1:length(l)),
                   add.legend = TRUE, main = "Figure 5e", maxfp=100)
-
-affycomp.compfig5f(l, method.names = as.character(1:length(l)),
-                  add.legend = TRUE, main = "Figure 5f", maxfp=100)
-
 
 }
 \arguments{
@@ -72,8 +67,8 @@ affycomp.compfig5f(l, method.names = as.character(1:length(l)),
   \item{rotate}{in the case of compfig4c one can eiher show the actual
     local slopes or the bias (local slope minus 1).}
   \item{maxfp}{range of the false positives in ROC will be from 0 to \code{maxfp}}
-  \item{type}{compfig5cdef is the engine for 5c, 5d, 5e, and
-5f. \code{type} tells is which of these 4 to run.}
+  \item{type}{compfig5cdef is the engine for 5c, 5d, and
+5e. \code{type} tells is which of these 4 to run.}
 }
 \details{
   These are similar to the functions defined in

@@ -6,7 +6,10 @@
 \alias{tableFC2}
 \alias{tableSignal}
 \alias{tableOverallSNR}
+\alias{tableRanks}
 \alias{tableLS}
+\alias{tableMA2}
+\alias{tableSpikeInSD}
 
 %- Also NEED an `\alias' for EACH other topic documented here.
 \title{Expression Assessment Table}
@@ -27,9 +30,15 @@ tableFC2(l, method.names=NULL)
 
 tableSignal(l, method.names=NULL)
 
+tableLS(l, method.names=NULL)
+
+tableSpikeInSD(l, method.names=NULL)
+
+tableMA2(l, method.names=NULL)
+
 tableOverallSNR(...,assessment.list=NULL,method.names=NULL,ngenes=12626)
 
-tableLS(...,assessment.list=NULL,method.names=NULL,ngenes=12626,rank=TRUE)
+tableRanks(...,assessment.list=NULL,method.names=NULL,ngenes=12626,rank=TRUE)
 }
 \arguments{
   \item{\dots}{lists produced by the assessment functions}
@@ -38,7 +47,7 @@ tableLS(...,assessment.list=NULL,method.names=NULL,ngenes=12626,rank=TRUE)
   \item{method.names}{A character vector with the names of the
     epxression measure methodology.}
   \item{l}{list of assessments.}
-  \item{rank}{if \code{TRUE} \code{tableLS} will present ranks instead
+  \item{rank}{if \code{TRUE} \code{tableRanks} will present ranks instead
     of local slopes.}
   \item{ngenes}{when computing ranks, out of how many genes should we do it?}
 }
@@ -48,14 +57,17 @@ tableLS(...,assessment.list=NULL,method.names=NULL,ngenes=12626,rank=TRUE)
   has more entries. Once an
   assessment is used this function knows what to do. You can call any of
   the assessment functions described in \code{\link{assessSpikeIn}},
-  \code{\link{assessDilution}} and \code{\link{assessSD}}.
+  \code{\link{assessDilution}}, \code{\link{assessSD}},
+  \code{\link{assessLS}}, \code{\link{assessMA2}}, and \code{\link{assessSpikeInSD}}.
 
-  Note \code{tableLS} and \code{tableOverallSNR} work on the results
+  Note \code{tableRanks} and \code{tableOverallSNR} work on the results
   from \code{\link{assessSpikeIn2}}.
   
 }
 \value{
-A matrix. One column per each method and one row for each comparison.}
+  A matrix. One column per each method and one row for each comparison.
+
+tableOverallSNR is an exception. Where rows represnt methods.}
 }
 \author{Rafael A. Irizarry}
 \examples{

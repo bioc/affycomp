@@ -13,7 +13,6 @@
 \alias{affycomp.figure5c}
 \alias{affycomp.figure5d}
 \alias{affycomp.figure5e}
-\alias{affycomp.figure5f}
 \alias{affycomp.figure6a}
 \alias{affycomp.figure6b}
 \title{Auxiliary functions to create Figures}
@@ -25,11 +24,11 @@ expression measure. They take components created by the
 functions. }
 \usage{
 affycomp.figure1(l,main="Figure 1",xlim=NULL,ylim=NULL)
-affycomp.figure1b(l,main="Figure 1b",xlim=NULL,ylim=NULL)
+affycomp.figure1b(l,main="Figure 1b",xlim=NULL,ylim=NULL,cex=0.85,all=FALSE)
 affycomp.figure2(l,main="Figure 2")
 affycomp.figure2b(l,main="Figure 2b")
 affycomp.figure3(l, main = "Figure 3")
-affycomp.figure4a(l, main = "Figure 4a")
+affycomp.figure4a(l, main = "Figure 4a",equal.lims=FALSE)
 affycomp.figure4b(l, main = "Figure 4b")
 affycomp.figure4c(l, rotate=TRUE, main = "Figure 4c")
 affycomp.figure5a(l, main = "Figure 5a",maxfp=100)
@@ -37,7 +36,6 @@ affycomp.figure5b(l, main = "Figure 5b",maxfp=100)
 affycomp.figure5c(l, main = "Figure 5c",maxfp=100)
 affycomp.figure5d(l, main = "Figure 5d",maxfp=100)
 affycomp.figure5e(l, main = "Figure 5e",maxfp=100)
-affycomp.figure5f(l, main = "Figure 5f",maxfp=100)
 affycomp.figure6a(l, main = "Figure 6a",xlim = NULL, ylim = NULL)
 affycomp.figure6b(l, main = "Figure 6b",xlim = NULL, ylim = NULL)
 }
@@ -48,6 +46,11 @@ affycomp.figure6b(l, main = "Figure 6b",xlim = NULL, ylim = NULL)
   \item{maxfp}{range of the false positives in ROC will be from 0 to \code{maxfp}}
   \item{xlim}{x-axis limits.}
   \item{ylim}{y-axis limits.}
+  \item{cex}{size of numbers in figure 1b.}
+  \item{all}{logical. If \code{TRUE} all spikeins are shown. Otherwise,
+    only those resulting in smaller, realistic, fold changes are shown.}
+  \item{equal.lims}{logical. If \code{TRUE} the limits of x-axis and
+    y-axis will have same range.}
   \item{rotate}{in the case of compfig4c one can eiher show the actual
     local slopes or the bias (local slope minus 1).}
 }
