@@ -1,7 +1,8 @@
-read.spikein <- function(filename){
+read.spikein <- function(filename,cdfName=c("hgu95a","hgu133a")){
 #######################################################
 ###prep spike in exprSet
 #######################################################
+  cdfName <- match.arg(cdfName)
   s <- read.csv(filename,check.names=FALSE,row.names=1)
   samplenames <- colnames(s)
   ##remove the .cel if its there
@@ -10,14 +11,24 @@ read.spikein <- function(filename){
   samplenames <- sub("\\.cel$","",samplenames,ignore.case=TRUE)
   colnames(s) <- samplenames
   ##read phenodata
-  data(spikein.phenodata)
+  if(cdfName=="hgu95a"){
+    data(spikein.phenodata)
+    pd <- spikein.phenodata
+  }
+  if(cdfName=="hgu133a"){
+    data(hgu133a.spikein.phenodata)
+    pd <- hgu133a.spikein.phenodata  
+  }
   ##putit in order
-  s <- s[,rownames(pData(spikein.phenodata))]
-  s <- new("exprSet",exprs=as.matrix(s),phenoData=spikein.phenodata)
+  s <- s[,rownames(pData(pd))]
+  s <- new("exprSet",exprs=as.matrix(s),phenoData=pd)
   s <- exprset.log(s) ##take log
   return(s)
 }
 
+read.newspikein <- function(filename)
+  read.spikein(filename,cdfName="hgu133a")
+                                                  
 read.dilution <- function(filename){
 #######################################################
 ###prep dilution exprSet

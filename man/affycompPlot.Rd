@@ -11,11 +11,13 @@ Function that makes assessment plot}
 \usage{
 affycompPlot(...,assessment.list=NULL,method.names=NULL,
              figure1.xlim=c(-4,15),figure1.ylim=c(-10,12),
+             figure1b.xlim=c(-4,15),figure1b.ylim=c(-6,5),
              figure6a.xlim=c(-12,12),figure6a.ylim=c(-12,12),
              figure6b.xlim=c(-3,3),figure6b.ylim=c(-6,6))
 
 affycomp.compfigs(l,method.names=NULL,
                   figure1.xlim=c(-4,15),figure1.ylim=c(-10,12),
+                  figure1b.xlim=figure1b.xlim,figure1b.ylim=figure1b.ylim,
                   figure6a.xlim=c(-12,12),figure6a.ylim=c(-12,12),
                   figure6b.xlim=c(-3,3),figure6b.ylim=c(-6,6))
 affycomp.figures(l)
@@ -31,6 +33,8 @@ affycomp.compfigs.calls(what)
     epxression measure methodology.}
   \item{figure1.xlim}{x-axis lim used for the plots in Figure 1.}
   \item{figure1.ylim}{y-axis lim used for the plots in Figure 1.}
+  \item{figure1b.xlim}{x-axis lim used for the plots in Figure 1b.}
+  \item{figure1b.ylim}{y-axis lim used for the plots in Figure 1b.}
   \item{figure6a.xlim}{x-axis lim used for the plots in Figure 6a.}
   \item{figure6a.ylim}{y-axis lim used for the plots in Figure 6a.}
   \item{figure6b.xlim}{x-axis lim used for the plots in Figure 6b.}

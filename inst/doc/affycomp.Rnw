@@ -74,6 +74,17 @@ common background cRNA. The data can be obtained form
 Two phenoData objects are included in the package that give more details:  
 \verb+dilution.phenodata+ and \verb+spikein.phenodata+.
 
+\section{What's new in version 1.2?}
+A new sets of assessment has been added. The wrapper is called 
+\verb+assessSpikeIn2+ and one can send it a exprSet with the spikein as 
+\verb+assessSpikeIn+ but it only uses culumnes 1,...,13,17 and 21,...,33,37. 
+So one only needs to get expression measures for these 28 arrays if one plans 
+to only use \verb+assessSpikeIn2+. The engine functions are \verb+assessLS+, 
+\verb+assessSpikeInSD+, and \verb+assessMA2+.
+ 
+All spike in related assessments now work with both the HGU95A (this is the one used in version 1.1) and HGU133A. The function \verb+read.newspikein+ will 
+read the HGU133A expression values. 
+
 \section{The Image Report}
 If you have a file named \verb+dilfilename.csv+ with the dilution
 expression values and  \verb+sifilename.csv+ with the spikein

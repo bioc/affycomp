@@ -1,5 +1,6 @@
 affycomp.compfigs <- function(l,method.names=NULL,
                               figure1.xlim=c(-4,15),figure1.ylim=c(-10,12),
+                              figure1b.xlim=c(-4,15),figure1b.ylim=c(-4,4),
                               figure6a.xlim=c(-12,12),figure6a.ylim=c(-12,12),
                               figure6b.xlim=c(-3,3),figure6b.ylim=c(-6,6)){
   ##if spikein or all take out the what. otherwise make list
@@ -49,13 +50,16 @@ affycomp.compfigs <- function(l,method.names=NULL,
     }
   }
 }
-  
+
 affycomp.compfigs.calls <- function(what){  
   args <- c("MA","Dilution","Dilution","Signal",
-            "Dilution","FC","FC2","FC","FC","SD")
+            "Dilution","FC","FC2","FC","FC","SD",
+            "MA2","SpikeInSD","LS",
+            "MA2","MA2","MA2","MA2")
   fignames <- c("figure1","compfig2","compfig3","compfig4a","compfig4b",
-                "compfig5a","compfig5b","figure6a","figure6b","compfig7")
-  
+                "compfig5a","compfig5b","figure6a","figure6b","compfig7",
+                "figure1b","compfig2b","compfig4c",
+                "compfig5c","compfig5d","compfig5e","compfig5f")
   paste("affycomp.",fignames[args%in%what],sep="")
 }  
 

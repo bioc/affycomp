@@ -1,11 +1,19 @@
 \name{affycomp.compfigs.auxiliary}
 \alias{affycomp.compfigs.auxiliary}
 \alias{affycomp.compfig2}
+\alias{affycomp.compfig2b}
 \alias{affycomp.compfig3}
 \alias{affycomp.compfig4a}
 \alias{affycomp.compfig4b}
+\alias{affycomp.compfig4c}
 \alias{affycomp.compfig5a}
 \alias{affycomp.compfig5b}
+\alias{affycomp.compfig5cdef}
+\alias{affycomp.compfig5c}
+\alias{affycomp.compfig5d}
+\alias{affycomp.compfig5e}
+\alias{affycomp.compfig5f}
+
 %- Also NEED an `\alias' for EACH other topic documented here.
 \title{Auxiliary functions to create comparitive Figures}
 \description{
@@ -27,11 +35,30 @@ affycomp.compfig4a(l, method.names = as.character(1:length(l)),
 affycomp.compfig4b(l, method.names = as.character(1:length(l)),
                    add.legend = TRUE, main = "Figure 4b")
 
+affycomp.compfig4c(l, method.names = as.character(1:length(l)),
+                   add.legend = TRUE, rotate=TRUE, main = "Figure 4c")
+
 affycomp.compfig5a(l, method.names = as.character(1:length(l)),
                   add.legend = TRUE, main = "Figure 5a", maxfp=100)
 
 affycomp.compfig5b(l, method.names = as.character(1:length(l)),
                   add.legend = TRUE, main = "Figure 5b", maxfp=100)
+
+affycomp.compfig5cdef(l, method.names = as.character(1:length(l)),
+                  add.legend = TRUE, main = "Figure 5c", maxfp=100,
+                  type=c("low","medlow","medhigh","high")
+
+affycomp.compfig5c(l, method.names = as.character(1:length(l)),
+                  add.legend = TRUE, main = "Figure 5c", maxfp=100)
+
+affycomp.compfig5d(l, method.names = as.character(1:length(l)),
+                  add.legend = TRUE, main = "Figure 5d", maxfp=100)
+
+affycomp.compfig5e(l, method.names = as.character(1:length(l)),
+                  add.legend = TRUE, main = "Figure 5e", maxfp=100)
+
+affycomp.compfig5f(l, method.names = as.character(1:length(l)),
+                  add.legend = TRUE, main = "Figure 5f", maxfp=100)
 
 
 }
@@ -42,7 +69,11 @@ affycomp.compfig5b(l, method.names = as.character(1:length(l)),
     expression measures methodologies being compared. }
   \item{add.legend}{logical. If TRUE a legend is added.}
   \item{main}{title of the Figure.}
+  \item{rotate}{in the case of compfig4c one can eiher show the actual
+    local slopes or the bias (local slope minus 1).}
   \item{maxfp}{range of the false positives in ROC will be from 0 to \code{maxfp}}
+  \item{type}{compfig5cdef is the engine for 5c, 5d, 5e, and
+5f. \code{type} tells is which of these 4 to run.}
 }
 \details{
   These are similar to the functions defined in

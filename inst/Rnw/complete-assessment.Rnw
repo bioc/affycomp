@@ -38,6 +38,18 @@ Table:
 tableAll(tmp.assessment)
 @ 
 
+
+Overall signal to ratio assessment:
+<<>>=
+tableOverallSNR(tmp.assessment2)
+@ 
+Expected Rank (out of 12626) for genes with fold change of 2 when all
+other genes are not differentially expressed stratified by nominal
+concentration. 
+<<>>=
+tableLS(tmp.assessment2)
+@ 
+
 \begin{figure}[htbp]
 \begin{center}
 <<fig=TRUE,echo=F>>=
@@ -57,13 +69,55 @@ affycompPlot(tmp.assessment$MA)
 
 \begin{figure}[htbp]
 \begin{center}
+<<fig=TRUE,echo=F>>=
+affycomp.figure1b(tmp.assessment2$MA2)
+@
+\end{center}
+{Figure 1b: The MA plot shows log fold change as a function of
+    mean log expression level.  A set of 28 arrays representing a single
+    experiment from the Affymetrix spike-in data are used for this plot.
+    Fold changes are generated for all possible comparisons of the
+    the first 14 arrays and the second 14 arrays.
+    Spiked-in genes are 
+    symbolized by numbers representing the nominal $\log_2$ fold change
+    for the gene.  Of the genes that are spiked to be differentially
+    expressed, only genes with small nominal fold changes are
+    shown. The colors represent 
+    four different groups: nominal concentration of genes being compared
+    less than or equal to 1 picoMolar (red), between 2 and 8 picoMolar
+    (orange), between 16 and 
+    64 picoMolar (green), greater than 128 picoMolar (blue).
+    Non-differentially expressed genes with observed fold 
+    changes larger than 2 are plotted in red. All other probesets are
+    represented with black dots.}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
 <<echo=F,fig=TRUE>>=
 affycomp.figure2(tmp.assessment$Dilution)
 @
 \end{center}
-  {Figure 2:   For each gene,
-  and each experimental condition, we calculate the mean log
+  {Figure 2:  For each gene,
+  and each experimental condition in the dilution data set, we
+  calculate the mean log 
   expression and the observed standard deviation across   5
+  replicates. The
+  resulting scatterplot is smoothed to generate a single curve
+  representing mean standard deviation as a function of mean log
+  expression.}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\begin{center}
+<<echo=F,fig=TRUE>>=
+affycomp.figure2b(tmp.assessment2$SpikeInSD)
+@
+\end{center}
+  {Figure 2b:  For each non-spiked-in gene in the 28 arrays used in
+  Figure 1b, we calculate the mean log 
+  expression and the observed standard deviation across the 28
   replicates. The
   resulting scatterplot is smoothed to generate a single curve
   representing mean standard deviation as a function of mean log
@@ -112,6 +166,23 @@ affycomp.figure4b(tmp.assessment$Dilution)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
+affycomp.figure4c(tmp.assessment2$LS)
+@
+\end{center}
+{Figure 4c) Using the 28 arrays of Figure 1b, we compute local
+  slopes.  As the slopes shown in Figure 4a), the local slopes
+  represent the expected observed log fold-change for probesets 
+  with true fold-change of 2 but they are presented as a
+  function of the total nominal probeset concentration in the two 
+  samples being compared. In theory the local slopes should be one so
+  we show the bias (difference between the observed local slope and one).}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+\begin{center}
+<<echo=F,fig=TRUE>>=
 affycomp.figure5a(tmp.assessment$FC)
 @
 \end{center}
@@ -134,6 +205,46 @@ affycomp.figure5b(tmp.assessment$FC)
       nominal fold changes equal to 2.}
 \end{figure}
 
+
+\begin{figure}[htbp]
+\begin{center}
+<<echo=F,fig=TRUE>>=
+affycomp.figure5c(tmp.assessment2$MA2)
+@
+\end{center}
+{Figure 5c) As 5a) but for comparisons with both nominal concentrations less
+  than or equal to 1 picoMolar.}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+<<echo=F,fig=TRUE>>=
+affycomp.figure5d(tmp.assessment2$MA2)
+@
+\end{center}
+{Figure 5d) As 5a) but for comparisons with both nominal
+  concentrations between 2 and 8 picoMolar.}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+<<echo=F,fig=TRUE>>=
+affycomp.figure5e(tmp.assessment2$MA2)
+@
+\end{center}
+{Figure 5e) As 5a) but for comparisons with both nominal
+  concentrations between 16 and 64 picoMolar.}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+<<echo=F,fig=TRUE>>=
+affycomp.figure5f(tmp.assessment2$MA2)
+@
+\end{center}
+{Figure 5f) As 5a) but for comparisons with both nominal
+  concentrations larger than 128 picoMolar.}
+\end{figure}
 
 \begin{figure}[htbp]
 \begin{center}

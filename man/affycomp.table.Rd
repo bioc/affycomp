@@ -5,6 +5,8 @@
 \alias{tableFC}
 \alias{tableFC2}
 \alias{tableSignal}
+\alias{tableOverallSNR}
+\alias{tableLS}
 
 %- Also NEED an `\alias' for EACH other topic documented here.
 \title{Expression Assessment Table}
@@ -24,6 +26,10 @@ tableFC(l, method.names=NULL)
 tableFC2(l, method.names=NULL)
 
 tableSignal(l, method.names=NULL)
+
+tableOverallSNR(...,assessment.list=NULL,method.names=NULL,ngenes=12626)
+
+tableLS(...,assessment.list=NULL,method.names=NULL,ngenes=12626,rank=TRUE)
 }
 \arguments{
   \item{\dots}{lists produced by the assessment functions}
@@ -32,6 +38,9 @@ tableSignal(l, method.names=NULL)
   \item{method.names}{A character vector with the names of the
     epxression measure methodology.}
   \item{l}{list of assessments.}
+  \item{rank}{if \code{TRUE} \code{tableLS} will present ranks instead
+    of local slopes.}
+  \item{ngenes}{when computing ranks, out of how many genes should we do it?}
 }
 \details{
   Read the vignette for more details on what the entries of the table
@@ -40,6 +49,9 @@ tableSignal(l, method.names=NULL)
   assessment is used this function knows what to do. You can call any of
   the assessment functions described in \code{\link{assessSpikeIn}},
   \code{\link{assessDilution}} and \code{\link{assessSD}}.
+
+  Note \code{tableLS} and \code{tableOverallSNR} work on the results
+  from \code{\link{assessSpikeIn2}}.
   
 }
 \value{

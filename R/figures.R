@@ -1,5 +1,6 @@
 affycompPlot <- function(...,assessment.list=NULL,method.names=NULL,
                          figure1.xlim=c(-4,15),figure1.ylim=c(-10,12),
+                         figure1b.xlim=c(-4,15),figure1b.ylim=c(-6,5),
                          figure6a.xlim=c(-12,12),figure6a.ylim=c(-12,12),
                          figure6b.xlim=c(-3,3),figure6b.ylim=c(-6,6)){
   if(is.null(assessment.list)) l<-list(...) else l <- assessment.list
@@ -12,15 +13,19 @@ affycompPlot <- function(...,assessment.list=NULL,method.names=NULL,
       if(is.null(tmp)) method.names[i] <- i else method.names[i] <- tmp
     }
   }  
-  
+
   for(i in 1:N){
     tmp <- l[[i]]
     if(tmp$what=="All") tmp <- tmp[1:5]
     else{
       if(tmp$what=="SpikeIn")
         tmp <- tmp[1:4]
-      else
-        tmp <- list(tmp)
+      else{
+        if(tmp$what=="SpikeIn2")
+          tmp <- tmp[1:3]
+        else
+          tmp <- list(tmp)
+      }
     }
     l[[i]] <- tmp
   }
@@ -30,6 +35,7 @@ affycompPlot <- function(...,assessment.list=NULL,method.names=NULL,
     if(is.null(method.names)) method.names <- 1:N
     affycomp.compfigs(l,method.names=method.names,
                       figure1.xlim=figure1.xlim,figure1.ylim=figure1.ylim,
+                      figure1b.xlim=figure1b.xlim,figure1b.ylim=figure1b.ylim,
                       figure6a.xlim=figure6a.xlim,figure6a.ylim=figure6a.ylim,
                       figure6b.xlim=figure6b.xlim,figure6b.ylim=figure6b.ylim)
   }
@@ -65,8 +71,12 @@ affycomp.figures <- function(l){
 
 affycomp.figure.calls <- function(what){  
   args <- c("MA","Dilution","Dilution","Signal",
-            "Dilution","FC","FC2","FC","FC","SD")
-  fignames <- c("1","2","3","4a","4b","5a","5b","6a","6b","7")
+            "Dilution","FC","FC2","FC","FC","SD",
+            "MA2","SpikeInSD","LS",
+            "MA2","MA2","MA2","MA2")
+  fignames <- c("1","2","3","4a","4b","5a","5b","6a","6b","7",
+                "1b","2b","4c",
+                "5c","5d","5e","5f")
   
   paste("affycomp.figure",fignames[args%in%what],sep="")
 }  

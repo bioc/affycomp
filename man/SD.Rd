@@ -21,9 +21,6 @@ tableSD(l,method.names=NULL)
   \item{method.names}{a character vector with the names of the
     expression measures methodologies being compared. }
   \item{main}{title of the Figure.}
-  \item{exprset}{An \code{\link[Biobase]{exprSet-class}} containing
-    exrpession measures for 
-    GeneLogic Dilution experiment.}
 }
 \details{
   This uses the dilution data. The exprsets need to have standard error

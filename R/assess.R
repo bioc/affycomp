@@ -126,21 +126,41 @@ assessSignal <- function(exprset,method.name=NULL){
 assessFC2 <- function(exprset,method.name=NULL){
   e <- exprs(exprset)
   pdata <- pData(exprset)
+
+  ##this is bad, but works
+  if(ncol(e)==59)
+    WHICHSPIKEIN <- "HGU95A"
+  else{
+    if(ncol(e)==42){
+      WHICHSPIKEIN <- "HGU133A"
+    }
+    else
+      stop("Not the right number of columns in expression matrix\n")
+  }
   
-  e <- e[,-grep("2353d99hpp_av08",colnames(e))] ##take d_08 because it has no pair
-  o1 <- c(2 ,4 ,6 ,8 ,10,12,17,18,19,20)
-  o1 <- c(o1,o1+20,c(42,44,46,48,50,55,56,57)) ##took out 58 and 54.. 54 is bad
-  o2 <- c(1,3,5,7, 9,11,13,14,15,16)
-  o2 <- c(o2,o2+20,c(41,43,45,47,49,51,52,53))##took out 54.see above
+
+
+  if(WHICHSPIKEIN=="HGU95A"){
+    e <- e[,-grep("2353d99hpp_av08",colnames(e))] ##take d_08 because it has no pair
+    o1 <- c(2 ,4 ,6 ,8 ,10,12,17,18,19,20)
+    o1 <- c(o1,o1+20,c(42,44,46,48,50,55,56,57)) ##took out 58 and 54.. 54 is bad
+    o2 <- c(1,3,5,7, 9,11,13,14,15,16)
+    o2 <- c(o2,o2+20,c(41,43,45,47,49,51,52,53))##took out 54.see above
+  }
+  else{
+    o1 <- seq(2,42,2)
+    o2 <- seq(1,41,2)
+  }
+  
   m <- e[,o1]-e[,o2]
   a <- (e[,o1] + e[,o2])/2
-
+  
   fc2 <- apply(m,2,function(x){
     tp <- sum(abs(x[match(colnames(pdata),names(x))]) >= 1) ##true positives
     fp <- sum(abs(x[-match(colnames(pdata),names(x))]) >= 1) ##false positives
     c(fp=fp,tp=tp)
   })
-    
+  
   rocs <- apply(m,2,function(x){
     x <- sort(-abs(x))
     y <- rep(0,length(x))
@@ -162,6 +182,17 @@ assessFC2 <- function(exprset,method.name=NULL){
 assessFC <- function(exprset,method.name=NULL){
   e <- exprs(exprset)
   pdata <- pData(exprset)
+
+  ##this is not good but works..
+  if(ncol(e)==59)
+    WHICHSPIKEIN <- "HGU95A"
+  else{
+    if(ncol(e)==42)
+      WHICHSPIKEIN <- "HGU133A"
+    else
+      stop("Not the right number of columns in expression matrix\n")
+  }
+
   
   genenames <- colnames(pdata)
   N <- length(genenames)
@@ -176,8 +207,9 @@ assessFC <- function(exprset,method.name=NULL){
   roc <- vector(mode="numeric",length=nrow(e))
   Count <- 0
 
-  for(i in 1:19){
-    for(j in (i+1):20){
+  if(WHICHSPIKEIN=="HGU95A") J <- 20 else J <- 14
+  for(i in 1:(J-1)){
+    for(j in (i+1):J){
       i1 <- pdata[i,]
       i2 <- pdata[j,]
       if(!all(i1-i2==0)){ ##if not reps lets do it
@@ -197,8 +229,9 @@ assessFC <- function(exprset,method.name=NULL){
     }
   }
 
-  for(i in 21:39){
-    for(j in (i+1):40){
+  
+  for(i in (J+1):(2*J-1)){
+    for(j in (i+1):(2*J)){
       i1 <- pdata[i,]
       i2 <- pdata[j,]
       if(!all(i1-i2==0)){ ##if not reps lets do it
@@ -217,8 +250,16 @@ assessFC <- function(exprset,method.name=NULL){
       }
     }
   }
- for(i in 41:57){
-    for(j in (i+1):58){
+
+  if(WHICHSPIKEIN=="HGU95A"){
+    J1 <- 41; J2 <- 58
+  }
+  else{
+    J1 <- 29; J2 <- 42
+  }
+
+  for(i in J1:(J2-1)){
+    for(j in (i+1):J2){
       i1 <- pdata[i,]
       i2 <- pdata[j,]
       if(!all(i1-i2==0) & i!=54 & j!=54){ ##if not reps lets do it
@@ -278,14 +319,30 @@ assessFC <- function(exprset,method.name=NULL){
 assessMA<- function(exprset,method.name=NULL){
   e <- exprs(exprset)
   pdata <- pData(exprset)
+
+  if(ncol(e)==59)
+    WHICHSPIKEIN <- "HGU95A"
+  else{
+    if(ncol(e)==42)
+      WHICHSPIKEIN <- "HGU133A"
+    else
+      stop("Not the right number of columns in expression matrix\n")
+  }
   
   N <- nrow(e)
   genenames <- colnames(pdata)
   spikeindex <- match(genenames,rownames(e))
   M <- length(genenames)
-
+  
   thearray <- 1
-  otherarrays <-  c(2:12,13,17)
+  if(WHICHSPIKEIN=="HGU95A"){
+    thearray <- 1
+    otherarrays <-  c(2:12,13,17)
+  }
+  else{
+    thearray <- 1
+    otherarrays <- 2:14#c(1:4,6:14)
+  }
   L <- length(otherarrays)
   m <- matrix(0,N,L)
   a <- matrix(0,N,L)
@@ -338,6 +395,9 @@ assessSD <- function(exprset,method.name=NULL,logx=FALSE){
   list(average.log.expression=x,log.ratio=y,what="SD",
        corr=cor(tmp1,tmp2),method.name=method.name)
 }
+
+
+
 
 
 
