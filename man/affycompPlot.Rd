@@ -11,7 +11,7 @@ Function that makes assessment plot}
 \usage{
 affycompPlot(...,assessment.list=NULL,method.names=NULL,
              figure1.xlim=c(-4,15),figure1.ylim=c(-10,12),
-             figure1b.xlim=c(-4,15),figure1b.ylim=c(-6,5),
+             figure1b.xlim=c(-2,14),figure1b.ylim=c(-6,5),
              figure6a.xlim=c(-12,12),figure6a.ylim=c(-12,12),
              figure6b.xlim=c(-3,3),figure6b.ylim=c(-6,6))
 
