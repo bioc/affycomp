@@ -1,8 +1,8 @@
 % -*- mode: noweb; noweb-default-code-mode: R-mode; -*-
-%\VignetteIndexEntry{affy primer}
+%\VignetteIndexEntry{affycomp primer}
 %\VignetteKeywords{Preprocessing, Affymetrix}
-%\VignetteDepends{affy}
-%\VignettePackage{affy}
+%\VignetteDepends{Biobase}
+%\VignettePackage{affycomp}
 %documentclass[12pt, a4paper]{article}
 \documentclass[12pt]{article}
 
