@@ -89,90 +89,81 @@ assessLS <-  function(exprset,method.name=NULL){
        what="LS")
 }
 
-assessMA2<-function(exprset,method.name=NULL){
-  mat <- exprs(exprset)
-
-  ##this is not good but works..
-  mat <- exprs(exprset)
-  if (ncol(mat) == 28) {
-    WHICHSPIKEIN <- "HGU95A"
-    NCOMP <- 91 * 2
-    I <-c(1:13,15:27)
-  }
-  else {
-    if (ncol(mat) == 42) {
-      WHICHSPIKEIN <- "HGU133A"
-      NCOMP <- 91 * 3
-      I <-c(1:13,15:27,29:41)
+assessMA2 <- function (exprset, method.name = NULL) 
+{
+    mat <- exprs(exprset)
+    if (ncol(mat) == 28) {
+        WHICHSPIKEIN <- "HGU95A"
+        NCOMP <- 91 * 2
+        I <- c(1:13, 15:27)
     }
-    else stop("Not the right number of columns in expression matrix\n")
-  }
-  pdata <- pData(exprset)
-  genenames <- colnames(pdata)
-  spikein <- match(genenames, geneNames(exprset))
-  quants <- matrix(0, nrow(mat) - length(spikein), NCOMP)
-  m <- matrix(0, nrow(mat), NCOMP)
-  a <- matrix(0, nrow(mat), NCOMP)
-  intended <- matrix(0, length(spikein), NCOMP)
-  denom <- matrix(0, length(spikein), NCOMP)
-  num <- matrix(0, length(spikein), NCOMP)
-  count <- 0
-
-  for (i in I) {
-    for (j in (i + 1): (14*ceiling(i/14))) {  #so j ends in 14,28,42
-      count <- count + 1
-      fc <- mat[, j] - mat[, i]
-      quants[, count] <- sort(fc[-spikein])
-      a[, count] <- (mat[, i] + mat[, j])/2
-      m[, count] <- fc
-      num[, count] <- as.numeric(pdata[j, ])
-      denom[, count] <- as.numeric(pdata[i, ])
-      intended[, count] <- log2(as.numeric(pdata[j, ])/as.numeric(pdata[i,]))
+    else {
+        if (ncol(mat) == 42) {
+            WHICHSPIKEIN <- "HGU133A"
+            NCOMP <- 91 * 3
+            I <- c(1:13, 15:27, 29:41)
+        }
+        else stop("Not the right number of columns in expression matrix\n")
     }
-  }
-#*******if we want some balance
-  set.seed(12345)
-  flip=which(sample(c(FALSE,TRUE),NCOMP,replace=T))
-  m[,flip]=-m[,flip]
-  intended[,flip]=-intended[,flip]
-  N2D=num[,flip];num[,flip]=denom[,flip];denom[,flip]=N2D
-
-  Index <- spikein
-  lowIndex     <- which(as.vector(num) <= 2 & as.vector(denom) <= 2)
-  medIndex  <- which(as.vector(num) >= 4 & as.vector(denom) >= 4 &
-                        as.vector(num) <= 32 & as.vector(denom) <= 32&
-                         abs(log2(as.vector(num)/as.vector(denom)))<=2)
-  highIndex    <- which(as.vector(num) >= 64 & as.vector(denom) >= 64&
-                         abs(log2(as.vector(num)/as.vector(denom)))<=2)
-  spikes <- as.vector(m[Index,])
-
-  nulls <- apply(quants,1,median)
-
-  tp.low <- sort(abs(spikes[lowIndex]),decreasing = TRUE)
-  fp.low <- sapply(tp.low,function(k) sum(abs(nulls)>=k))
-  tp.low <- seq(along=tp.low)/length(tp.low)
-
-  tp.med <- sort(abs(spikes[medIndex]),decreasing = TRUE)
-  fp.med <- sapply(tp.med,function(k) sum(abs(nulls)>=k))
-  tp.med <- seq(along=tp.med)/length(tp.med)
-
-  tp.high <- sort(abs(spikes[highIndex]),decreasing = TRUE)
-  fp.high <- sapply(tp.high,function(k) sum(abs(nulls)>=k))
-  tp.high <- seq(along=tp.high)/length(tp.high)
-
-  rownames(intended) <- genenames
-  SUB <- sample(1:length(m[-Index,]),length(nulls))
-  m <- c(m[Index,],m[-Index,][SUB])
-  a <- c(a[Index,],a[-Index,][SUB])
-  names(m)[1:(NCOMP*length(Index))] <- rep(rownames(mat)[Index],NCOMP)
-  names(a)[1:(NCOMP*length(Index))] <- rep(rownames(mat)[Index],NCOMP)
-
-  return(list(qs = nulls, m = m, a = a, spikein = spikein,
-              intended = intended, num = num, denom = denom,
-              fp.low=fp.low,  tp.low=tp.low,
-              fp.med=fp.med,  tp.med=tp.med,
-              fp.high=fp.high,tp.high=tp.high,
-              method.name=method.name,what="MA2"))
+    pdata <- pData(exprset)
+    genenames <- colnames(pdata)
+    spikein <- match(genenames, geneNames(exprset))
+    quants <- matrix(0, nrow(mat) - length(spikein), NCOMP)
+    m <- matrix(0, nrow(mat), NCOMP)
+    a <- matrix(0, nrow(mat), NCOMP)
+    intended <- matrix(0, length(spikein), NCOMP)
+    denom <- matrix(0, length(spikein), NCOMP)
+    num <- matrix(0, length(spikein), NCOMP)
+    count <- 0
+    for (i in I) {
+        for (j in (i + 1):(14 * ceiling(i/14))) {
+            count <- count + 1
+            fc <- mat[, j] - mat[, i]
+            quants[, count] <- sort(fc[-spikein])
+            a[, count] <- (mat[, i] + mat[, j])/2
+            m[, count] <- fc
+            num[, count] <- as.numeric(pdata[j, ])
+            denom[, count] <- as.numeric(pdata[i, ])
+            intended[, count] <- log2(as.numeric(pdata[j, ])/as.numeric(pdata[i, ]))
+        }
+    }
+    set.seed(12345)
+    flip = which(sample(c(FALSE, TRUE), NCOMP, replace = T))
+    m[, flip] = -m[, flip]
+    intended[, flip] = -intended[, flip]
+    N2D = num[, flip]
+    num[, flip] = denom[, flip]
+    denom[, flip] = N2D
+    Index <- spikein
+    lowIndex <- which(as.vector(num) <= 2 & as.vector(denom) <= 
+        2)
+    medIndex <- which(as.vector(num) >= 4 & as.vector(denom) >= 
+        4 & as.vector(num) <= 32 & as.vector(denom) <= 32 & abs(log2(as.vector(num)/as.vector(denom))) <= 
+        2)
+    highIndex <- which(as.vector(num) >= 64 & as.vector(denom) >= 
+        64 & abs(log2(as.vector(num)/as.vector(denom))) <= 2)
+    spikes <- as.vector(m[Index, ])
+    nulls <- apply(quants, 1, median)
+    tp.low <- sort(abs(spikes[lowIndex]), decreasing = TRUE)
+    fp.low <- sapply(tp.low, function(k) sum(abs(nulls) >= k))
+    tp.low <- seq(along = tp.low)/length(tp.low)
+    tp.med <- sort(abs(spikes[medIndex]), decreasing = TRUE)
+    fp.med <- sapply(tp.med, function(k) sum(abs(nulls) >= k))
+    tp.med <- seq(along = tp.med)/length(tp.med)
+    tp.high <- sort(abs(spikes[highIndex]), decreasing = TRUE)
+    fp.high <- sapply(tp.high, function(k) sum(abs(nulls) >= 
+        k))
+    tp.high <- seq(along = tp.high)/length(tp.high)
+    rownames(intended) <- genenames
+    SUB <- sample(1:length(m[-Index, ]), length(nulls))
+    m <- c(m[Index, ], m[-Index, ][SUB])
+    a <- c(a[Index, ], a[-Index, ][SUB])
+    names(m)<- c(rep(rownames(mat)[Index], NCOMP), rep(NA,length(m)-length(Index)*NCOMP))
+    names(a)<-names(m)
+    return(list(qs = nulls, m = m, a = a, spikein = spikein, 
+        intended = intended, num = num, denom = denom, fp.low = fp.low, 
+        tp.low = tp.low, fp.med = fp.med, tp.med = tp.med, fp.high = fp.high, 
+        tp.high = tp.high, method.name = method.name, what = "MA2"))
 }
 
 

@@ -1,15 +1,16 @@
+SD                      SD Assessment Functions
 affycomp.compfigs.auxiliary
                         Auxiliary functions to create comparitive
                         Figures
 affycomp.figures.auxiliary
                         Auxiliary functions to create Figures
-affycompPlot            Assessment Plots
 affycompTable           Expression Assessment Table
+affycompPlot            Assessment Plots
 assessAll               Assessment functions
 assessDilution          Assessment functions for Dilution Data
 assessSD                SD Assessment functions
-assessSpikeIn2          New Assessment functions for Spike In Data
 assessSpikeIn           Assessment functions for Spike In Data
+assessSpikeIn2          New Assessment functions for Spike In Data
 dilution.phenodata      Phenotypic Information for Dilution Study
 exprset.log             Take log base 2 of Expression
 hgu133a.spikein.phenodata
@@ -21,6 +22,5 @@ readin                  Read Expression Date Sets
 remove.hgu133a.xhyb     Remove crosshybridizers
 rma.assessment          An example of the result of an assessment
 rma.sd.assessment       An example of the result of an SD assessment
-SD                      SD Assessment Functions
 spikein.phenodata       phenotypic information for spike in study
 hgu133a.spikein.xhyb    Cross hybridizers
