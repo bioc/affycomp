@@ -55,11 +55,11 @@ affycomp.compfigs.calls <- function(what){
   args <- c("MA","Dilution","Dilution","Signal",
             "Dilution","FC","FC2","FC","FC","SD",
             "MA2","SpikeInSD","LS",
-            "MA2","MA2","MA2","MA2")
+            "MA2","MA2","MA2")
   fignames <- c("figure1","compfig2","compfig3","compfig4a","compfig4b",
                 "compfig5a","compfig5b","figure6a","figure6b","compfig7",
                 "figure1b","compfig2b","compfig4c",
-                "compfig5c","compfig5d","compfig5e","compfig5f")
+                "compfig5c","compfig5d","compfig5e")
   paste("affycomp.",fignames[args%in%what],sep="")
 }  
 

@@ -4,8 +4,8 @@ affycomp.compfigs.auxiliary
                         Figures
 affycomp.figures.auxiliary
                         Auxiliary functions to create Figures
-affycompTable           Expression Assessment Table
 affycompPlot            Assessment Plots
+affycompTable           Expression Assessment Table
 assessAll               Assessment functions
 assessDilution          Assessment functions for Dilution Data
 assessSD                SD Assessment functions
@@ -16,6 +16,7 @@ exprset.log             Take log base 2 of Expression
 hgu133a.spikein.phenodata
                         phenotypic information for HGU133A spike in
                         study
+hgu133a.spikein.xhyb    Cross hybridizers
 lw.sd.assessment        An example of the result of an SD assessment
 mas5.assessment         An example of the result of the assessments
 readin                  Read Expression Date Sets
@@ -23,4 +24,3 @@ remove.hgu133a.xhyb     Remove crosshybridizers
 rma.assessment          An example of the result of an assessment
 rma.sd.assessment       An example of the result of an SD assessment
 spikein.phenodata       phenotypic information for spike in study
-hgu133a.spikein.xhyb    Cross hybridizers

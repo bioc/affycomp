@@ -73,10 +73,10 @@ affycomp.figure.calls <- function(what){
   args <- c("MA","Dilution","Dilution","Signal",
             "Dilution","FC","FC2","FC","FC","SD",
             "MA2","SpikeInSD","LS",
-            "MA2","MA2","MA2","MA2")
+            "MA2","MA2","MA2")
   fignames <- c("1","2","3","4a","4b","5a","5b","6a","6b","7",
                 "1b","2b","4c",
-                "5c","5d","5e","5f")
+                "5c","5d","5e")
   
   paste("affycomp.figure",fignames[args%in%what],sep="")
 }  

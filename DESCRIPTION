@@ -1,6 +1,6 @@
 Package: affycomp
-Version: 1.2.9
-Date: 2004-2-14
+Version: 1.3.0
+Date: 2004-5-13
 Title: Graphics Toolbox for Assessment of Affymetrix Expression Measures
 Author: Rafael A. Irizarry <rafa@jhu.edu> and Zhijin Wu <zwu@jhsph.edu>
 	with contributions from

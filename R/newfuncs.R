@@ -135,13 +135,18 @@ assessMA2 <- function (exprset, method.name = NULL)
     num[, flip] = denom[, flip]
     denom[, flip] = N2D
     Index <- spikein
-    lowIndex <- which(as.vector(num) <= 2 & as.vector(denom) <= 
-        2)
-    medIndex <- which(as.vector(num) >= 4 & as.vector(denom) >= 
-        4 & as.vector(num) <= 32 & as.vector(denom) <= 32 & abs(log2(as.vector(num)/as.vector(denom))) <= 
-        2)
-    highIndex <- which(as.vector(num) >= 64 & as.vector(denom) >= 
-        64 & abs(log2(as.vector(num)/as.vector(denom))) <= 2)
+
+    lowIndex <- which(pmax(as.vector(num),as.vector(denom)) <= 2^1  &
+                         abs(log2(as.vector(num)/as.vector(denom)))<=1)
+    
+    medIndex <- which(pmin(as.vector(num),as.vector(denom)) >= 2^2 &
+                         pmax(as.vector(num),as.vector(denom)) <= 2^5 &
+                         abs(log2(as.vector(num)/as.vector(denom)))<=1)
+    
+    highIndex <- which(pmin(as.vector(num),as.vector(denom))>=2^6&
+                       abs(log2(as.vector(num)/as.vector(denom)))<=1 )
+
+        
     spikes <- as.vector(m[Index, ])
     nulls <- apply(quants, 1, median)
     tp.low <- sort(abs(spikes[lowIndex]), decreasing = TRUE)
@@ -333,14 +338,18 @@ affycomp.figure1b <- function(l,main="Figure 1b",xlim=NULL,ylim=NULL,cex=.85,
   else{
     num <- as.vector(l$num); denom <- as.vector(l$denom)
     tmplist <- list()
-    tmplist[[1]] <- which(as.vector(num) <= 2 & as.vector(denom) <= 2)
-    tmplist[[2]] <- which(as.vector(num) >= 4 & as.vector(denom) >= 4 &
-                          as.vector(num) <= 32 & as.vector(denom) <= 32 &
-                         abs(log2(as.vector(num)/as.vector(denom)))<=2)
-    tmplist[[3]] <- which(as.vector(num) >= 64 & as.vector(denom) >= 64&
-                         abs(log2(as.vector(num)/as.vector(denom)))<=2)
 
+    tmplist[[1]] <- which(pmax(as.vector(num),as.vector(denom)) <= 2^1)
+        
 
+    tmplist[[2]] <- which(pmin(as.vector(num),as.vector(denom)) >= 2^2 &
+                         pmax(as.vector(num),as.vector(denom)) <= 2^5 &
+                         abs(log2(as.vector(num)/as.vector(denom)))<=2)
+    
+    tmplist[[3]] <- which(pmin(as.vector(num),as.vector(denom))>=2^6&
+                       abs(log2(as.vector(num)/as.vector(denom)))<=2 )
+
+    
     if(is.null(ylim))
       ylim <- range(c(y,yy[unlist(tmplist)]),na.rm=TRUE,finite=TRUE)
     if(is.null(xlim))
