@@ -46,7 +46,7 @@ assessLS <-  function(exprset,method.name=NULL){
   pdata <- pData(exprset)
   genenames <- colnames(pdata)
   y <- as.vector(t(e[match(genenames,geneNames(exprset)),]))
-  names(y) <- rep(colnames(pdata),nrow(pdata))
+  names(y) <- rep(colnames(pdata),rep(nrow(pdata),ncol(pdata)))
   x <- log2(as.vector(as.matrix(pdata)))
   names(x) <- names(y)
   fit1 <- lm(y~x,subset=x>-Inf)
