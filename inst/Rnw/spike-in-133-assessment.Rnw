@@ -111,7 +111,7 @@ affycomp.figure2b(spikein.assessment2.133$SpikeInSD)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure4a(spikein.assessment$Signal,equal.lims=TRUE)
+affycomp.figure4a(spikein.assessment.133$Signal,equal.lims=TRUE)
 @
 \end{center}
 {Figure 4a) Average observed $log_2$ intensity plotted
