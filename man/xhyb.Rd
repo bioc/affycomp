@@ -3,7 +3,8 @@
 \alias{hgu133a.spikein.xhyb}
 \title{Cross hybridizers}
 \description{Probe Sets likely to crosshybridize to spiked-in probesets in the
-  Affymetrix HGU133A spike in}
+  Affymetrix HGU133A spike in.
+  
 This objact is list. Each component of the list contains probeset names
 of possible crosshybridizers. The sequences of each spiked-in clone were
 collected and blasted against all HG-U133A target sequences.  Target

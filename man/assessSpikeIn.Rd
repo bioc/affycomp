@@ -20,7 +20,6 @@ assessFC(exprset,method.name=NULL)
 assessFC2(exprset,method.name=NULL)
 
 }
-%- maybe also `usage' for other objects documented here.
 \arguments{
     \item{s}{An \code{\link[Biobase]{exprSet-class}} containing
      exrpession measures for 
@@ -35,11 +34,10 @@ assessFC2(exprset,method.name=NULL)
   \code{assessMA} performs the assessment for the MA-plot (Figure 1),
   \code{assessSignal} performs the assessment for signal detection plot
   (Figure 4a), \code{assessFC} perfomrs assessments used by fold-change
-  related  plots (Figures 5a, 6a, 6b}. \code{assessFC2} is for the ROC
+  related  plots (Figures 5a, 6a, 6b). \code{assessFC2} is for the ROC
 for genes with nominal fold changes of 2 (Figure
 5b). \code{assessSpikeIn} is a wrapper for all these and returns a list
-of lists.  
-}
+of lists. }
 \value{
   Lists with the necessary information to make the Figures.
 }

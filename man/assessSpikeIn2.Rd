@@ -34,7 +34,7 @@ assessMA2(exprset,method.name=NULL)
   \code{assessMA2} performs the assessment for the second MA-plot (Figure 1b),
   \code{assessLS} performs the assessment for signal detection plot
   (Figure 4c), \code{assessMA2} also perfomrs assessments used by
-  fold-change related  plots (Figures 5c-f}. \code{assessSpikeInSD} is
+  fold-change related  plots (Figures 5c-f). \code{assessSpikeInSD} is
 for the standard deviation assessment of Figure 2b.
 \code{assessSpikeIn2} is a wrapper for all these and returns a list
 of lists.  
