@@ -1,0 +1,97 @@
+% -*- mode: noweb; noweb-default-code-mode: R-mode; -*-
+%\VignetteIndexEntry{affycomp report}
+%\VignetteDepends{biobase}
+%\VignettePackage{affycomp}
+%documentclass[12pt, a4paper]{article}
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,pstricks}
+\usepackage{hyperref}
+\usepackage[authoryear,round]{natbib}
+
+\textwidth=6.2in
+\textheight=8.5in
+%\parskip=.3cm
+\oddsidemargin=.1in
+\evensidemargin=.1in
+\headheight=-.3in
+
+\newcommand{\scscst}{\scriptscriptstyle}
+\newcommand{\scst}{\scriptstyle}
+\begin{document}
+\title{Bioconductor Expression Assessment Tool for Affymetrix Oligonucleotide Arrays (affycomp)}
+\maketitle
+\tableofcontents
+
+<<echo=F,results=hide>>=
+library(affycomp)
+@
+
+In this report only assessment using the Dilution experiment are presetned. 
+Therefore, only Figures 2,3, and 4b are shown.
+
+<<echo=F>>=
+for(i in 1:nrow(affycomp.info))
+  cat(affycomp.info[i,1],affycomp.info[i,2],"\n")
+@ 
+
+
+<<echo=F>>=
+cat("Table for Dilution Data:\n")
+tableAll(dilution.assessment)
+@ 
+
+
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+affycomp.figure2(dilution.assessment)
+@
+\end{center}
+  {Figure 2:  For each gene,
+  and each experimental condition in the dilution data set, we
+  calculate the mean log 
+  expression and the observed standard deviation across   5
+  replicates. The
+  resulting scatterplot is smoothed to generate a single curve
+  representing mean standard deviation as a function of mean log
+  expression.}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+\begin{center}
+<<echo=F,fig=TRUE>>=
+affycomp.figure3(tmp.assessment$Dilution)
+@
+\end{center}
+{Figure 3: This plot, using the GeneLogic dilution data,
+  shows the sensitivity of fold change calculations to total RNA
+  abundance.  Average log fold-changes between liver and CNS for the
+  lowest concentration and the   highest in the dilution data set are
+  computed.  Orange and red color is used to denote genes with
+$M_{6g}-M_{1g}$ bigger than $\log_2(2)$ and $\log_2(3)$
+respectively. The rest are denoted with black.}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\begin{center}
+<<echo=F,fig=TRUE>>=
+affycomp.figure4b(dilution.assessment)
+@
+\end{center}
+{Figure 4b) For the GeneLogic
+    dilution data, log expression values are regressed against their
+    log nominal concentration. The slope estimates are plotted against
+    average log intensity across all concentrations.}
+\end{figure}
+
+
+\end{document}
+
+
+
+
+

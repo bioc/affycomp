@@ -27,10 +27,8 @@
 library(affycomp)
 @
 
-In this report only assessment using the {\bf HGU95} spike-In experiment 
-are presetned.  
-
-
+In this report only assessment using the {\bf HGU133} spike-In experiment 
+are presetned.  Figures 2,3, and 4b are therefore ommited.
 
 <<echo=F>>=
 for(i in 1:nrow(affycomp.info))
@@ -39,26 +37,21 @@ for(i in 1:nrow(affycomp.info))
 
 <<echo=F>>=
 cat("Overall signal to ratio assessment:\n")
-tableOverallSNR(spikein.assessment2)
+tableOverallSNR(spikein.assessment2.133)
   
 cat("\nExpected Rank (out of 12626) for genes with fold change of 2\nwhen all other genes are not differentially expressed\nstratified by nominal concentration.\n")
-tableRanks(spikein.assessment2)
+tableRanks(spikein.assessment2.133)
 
 cat("\nTable 1 for Spike-in Data:\n")
-tableAll(spikein.assessment)
+tableAll(spikein.assessment.133)
 cat("\nTable 2 for Spike-in Data:\n")
-tableAll(spikein.assessment2)
-@ 
-
-<<echo=F>>=
-cat("Table for Dilution Data:\n")
-tableAll(dilution.assessment)
+tableAll(spikein.assessment2.133)
 @ 
 
 \begin{figure}[htbp]
 \begin{center}
 <<fig=TRUE,echo=F>>=
-affycompPlot(spikein.assessment$MA)
+affycompPlot(spikein.assessment.133$MA)
 @
 \end{center}
 {Figure 1: The MA plot shows log fold change as a function of
@@ -75,7 +68,7 @@ affycompPlot(spikein.assessment$MA)
 \begin{figure}[htbp]
 \begin{center}
 <<fig=TRUE,echo=FALSE>>=
-affycomp.figure1b(spikein.assessment2$MA2)
+affycomp.figure1b(spikein.assessment2.133$MA2)
 @
 \end{center}
 {Figure 1b: The MA plot shows log fold change as a function of
@@ -96,27 +89,12 @@ affycomp.figure1b(spikein.assessment2$MA2)
     represented with black dots.}
 \end{figure}
 
-\begin{figure}[htbp]
-\begin{center}
-<<echo=FALSE,fig=TRUE>>=
-affycomp.figure2(dilution.assessment)
-@
-\end{center}
-  {Figure 2:  For each gene,
-  and each experimental condition in the dilution data set, we
-  calculate the mean log 
-  expression and the observed standard deviation across   5
-  replicates. The
-  resulting scatterplot is smoothed to generate a single curve
-  representing mean standard deviation as a function of mean log
-  expression.}
-\end{figure}
 
 
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure2b(spikein.assessment2$SpikeInSD)
+affycomp.figure2b(spikein.assessment2.133$SpikeInSD)
 @
 \end{center}
   {Figure 2b:  For each non-spiked-in gene in the 28 arrays used in
@@ -129,20 +107,6 @@ affycomp.figure2b(spikein.assessment2$SpikeInSD)
 \end{figure}
 
 
-\begin{figure}[htbp]
-\begin{center}
-<<echo=F,fig=TRUE>>=
-affycomp.figure3(dilution.assessment)
-@
-\end{center}
-{Figure 3: This plot, using the GeneLogic dilution data,
-  shows the sensitivity of fold change calculations to total RNA
-  abundance.  Average log fold-changes between liver and CNS for the
-  lowest concentration and the   highest in the dilution data set are
-  computed.  Orange and red color is used to denote genes with
-$M_{6g}-M_{1g}$ bigger than $\log_2(2)$ and $\log_2(3)$
-respectively. The rest are denoted with black.}
-\end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -158,19 +122,7 @@ affycomp.figure4a(spikein.assessment$Signal,equal.lims=TRUE)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure4b(dilution.assessment)
-@
-\end{center}
-{Figure 4b) For the GeneLogic
-    dilution data, log expression values are regressed against their
-    log nominal concentration. The slope estimates are plotted against
-    average log intensity across all concentrations.}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-<<echo=F,fig=TRUE>>=
-affycomp.figure4c(spikein.assessment2$LS)
+affycomp.figure4c(spikein.assessment2.133$LS)
 @
 \end{center}
 {Figure 4c) Using the 28 arrays of Figure 1b, we compute local
@@ -187,7 +139,7 @@ affycomp.figure4c(spikein.assessment2$LS)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5a(spikein.assessment$FC)
+affycomp.figure5a(spikein.assessment.133$FC)
 @
 \end{center}
   {Figure 5a) A typical identification rule for differential
@@ -202,7 +154,7 @@ affycomp.figure5a(spikein.assessment$FC)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5b(spikein.assessment$FC)
+affycomp.figure5b(spikein.assessment.133$FC)
 @
 \end{center}
   {Figure 5b) As 5a) but with
@@ -213,7 +165,7 @@ affycomp.figure5b(spikein.assessment$FC)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5c(spikein.assessment2$MA2)
+affycomp.figure5c(spikein.assessment2.133$MA2)
 @
 \end{center}
 {Figure 5c) As 5a) but for comparisons with both nominal concentrations less
@@ -223,7 +175,7 @@ affycomp.figure5c(spikein.assessment2$MA2)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5d(spikein.assessment2$MA2)
+affycomp.figure5d(spikein.assessment2.133$MA2)
 @
 \end{center}
 {Figure 5d) As 5a) but for comparisons with both nominal
@@ -233,7 +185,7 @@ affycomp.figure5d(spikein.assessment2$MA2)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5e(spikein.assessment2$MA2)
+affycomp.figure5e(spikein.assessment2.133$MA2)
 @
 \end{center}
 {Figure 5e) As 5a) but for comparisons with both nominal
@@ -243,7 +195,7 @@ affycomp.figure5e(spikein.assessment2$MA2)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure6a(spikein.assessment$FC)
+affycomp.figure6a(spikein.assessment.133$FC)
 @
 \end{center}
   {Figure 6a) Observed log fold changes plotted against
@@ -256,7 +208,7 @@ affycomp.figure6a(spikein.assessment$FC)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure6b(spikein.assessment$FC)
+affycomp.figure6b(spikein.assessment.133$FC)
 @
 \end{center}
   {Figure 6b) Like a) but

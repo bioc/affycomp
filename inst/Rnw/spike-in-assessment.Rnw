@@ -28,8 +28,7 @@ library(affycomp)
 @
 
 In this report only assessment using the {\bf HGU95} spike-In experiment 
-are presetned.  
-
+are presetned.  Figures 2,3, and 4b are therefore ommited.
 
 
 <<echo=F>>=
@@ -48,11 +47,6 @@ cat("\nTable 1 for Spike-in Data:\n")
 tableAll(spikein.assessment)
 cat("\nTable 2 for Spike-in Data:\n")
 tableAll(spikein.assessment2)
-@ 
-
-<<echo=F>>=
-cat("Table for Dilution Data:\n")
-tableAll(dilution.assessment)
 @ 
 
 \begin{figure}[htbp]
@@ -96,21 +90,6 @@ affycomp.figure1b(spikein.assessment2$MA2)
     represented with black dots.}
 \end{figure}
 
-\begin{figure}[htbp]
-\begin{center}
-<<echo=FALSE,fig=TRUE>>=
-affycomp.figure2(dilution.assessment)
-@
-\end{center}
-  {Figure 2:  For each gene,
-  and each experimental condition in the dilution data set, we
-  calculate the mean log 
-  expression and the observed standard deviation across   5
-  replicates. The
-  resulting scatterplot is smoothed to generate a single curve
-  representing mean standard deviation as a function of mean log
-  expression.}
-\end{figure}
 
 
 \begin{figure}[htbp]
@@ -129,20 +108,6 @@ affycomp.figure2b(spikein.assessment2$SpikeInSD)
 \end{figure}
 
 
-\begin{figure}[htbp]
-\begin{center}
-<<echo=F,fig=TRUE>>=
-affycomp.figure3(dilution.assessment)
-@
-\end{center}
-{Figure 3: This plot, using the GeneLogic dilution data,
-  shows the sensitivity of fold change calculations to total RNA
-  abundance.  Average log fold-changes between liver and CNS for the
-  lowest concentration and the   highest in the dilution data set are
-  computed.  Orange and red color is used to denote genes with
-$M_{6g}-M_{1g}$ bigger than $\log_2(2)$ and $\log_2(3)$
-respectively. The rest are denoted with black.}
-\end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -153,18 +118,6 @@ affycomp.figure4a(spikein.assessment$Signal,equal.lims=TRUE)
 {Figure 4a) Average observed $log_2$ intensity plotted
     against nominal $log_2$ concentration for each spiked-in gene for
     all arrays in  Affymetrix spike-In experiment. The dashed line has the ideal slope of 1.}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-<<echo=F,fig=TRUE>>=
-affycomp.figure4b(dilution.assessment)
-@
-\end{center}
-{Figure 4b) For the GeneLogic
-    dilution data, log expression values are regressed against their
-    log nominal concentration. The slope estimates are plotted against
-    average log intensity across all concentrations.}
 \end{figure}
 
 \begin{figure}[htbp]
