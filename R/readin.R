@@ -5,7 +5,9 @@ read.spikein <- function(filename){
   s <- read.csv(filename,check.names=FALSE,row.names=1)
   samplenames <- colnames(s)
   ##remove the .cel if its there
-  samplenames <- sapply(samplenames,function(samplename) strsplit(strsplit(samplename,"/")[[1]][length(strsplit(samplename,"/")[[1]])],"\\.")[[1]])
+  samplenames <- sub("\\.gz$","",samplenames,ignore.case=TRUE)
+  samplenames <- sub("\\.Z$","",samplenames,ignore.case=TRUE)
+  samplenames <- sub("\\.cel$","",samplenames,ignore.case=TRUE)
   colnames(s) <- samplenames
   ##read phenodata
   data(spikein.phenodata)
@@ -24,7 +26,9 @@ read.dilution <- function(filename){
   
   samplenames <- colnames(d)
   ##remove the .cel if its there
-  samplenames <- sapply(samplenames,function(samplename) strsplit(strsplit(samplename,"/")[[1]][length(strsplit(samplename,"/")[[1]])],"\\.")[[1]])
+  samplenames <- sub("\\.gz$","",samplenames,ignore.case=TRUE)
+  samplenames <- sub("\\.Z$","",samplenames,ignore.case=TRUE)
+  samplenames <- sub("\\.cel$","",samplenames,ignore.case=TRUE)
   colnames(d) <- samplenames
   ##read phenodata
   data(dilution.phenodata)
