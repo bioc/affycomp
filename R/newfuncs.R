@@ -27,7 +27,7 @@ assessSpikeInSD <- function(exprset,method.name=NULL,span=1/3){
   smooth1 <- loess(y~x,span=span,family="gaussian",degree=1)
   x2 <- sort(x)[seq(1,length(x),length=100)]
   y2 <- smooth1$fitted[order(x)][seq(1,length(x),length=100)]
-  
+
   list(x=x,y=y,xsmooth=x2,ysmooth=y2,loess=smooth1,method.name=method.name,what="SpikeInSD")
 }
 
@@ -75,11 +75,11 @@ assessMA2<-function(exprset,method.name=NULL){
     else
       stop("Not the right number of columns in expression matrix\n")
   }
- 
+
   pdata <- pData(exprset)
   genenames <- colnames(pdata)
   spikein <-match(genenames,geneNames(exprset))
-  
+
   quants <- matrix(0,nrow(mat)-length(spikein),NCOMP)
   m <- matrix(0,nrow(mat),NCOMP)
   a <- matrix(0,nrow(mat),NCOMP)
@@ -126,7 +126,7 @@ assessMA2<-function(exprset,method.name=NULL){
       }
     }
   }
-  
+
   Index <- spikein
   lowIndex     <- which(as.vector(num) <= 1 & as.vector(denom) <= 1)
   medlowIndex  <- which(as.vector(num) >= 2 & as.vector(denom) >= 2 &
@@ -135,31 +135,31 @@ assessMA2<-function(exprset,method.name=NULL){
                         as.vector(num) <= 64 & as.vector(denom) <= 64)
   highIndex    <- which(as.vector(num) >= 128 & as.vector(denom) >= 128)
   spikes <- as.vector(m[Index,])
-  
+
   nulls <-  m[-Index,]
   nulls <- nulls[seq(1,length(nulls),len=50000)] #resample because its 2mil!
-  
+
   tp.low <- sort(abs(spikes[lowIndex]),decreasing = TRUE)
   fp.low <- sapply(tp.low,function(k) sum(nulls>=k))
   tp.low <- seq(along=tp.low)/length(tp.low)*10
-  
+
   tp.medlow <- sort(abs(spikes[medlowIndex]),decreasing = TRUE)
   fp.medlow <- sapply(tp.medlow,function(k) sum(nulls>=k))
   tp.medlow <- seq(along=tp.medlow)/length(tp.medlow)*10
-  
+
   tp.medhigh <- sort(abs(spikes[medhighIndex]),decreasing = TRUE)
   fp.medhigh <- sapply(tp.medhigh,function(k) sum(nulls>=k))
   tp.medhigh <- seq(along=tp.medhigh)/length(tp.medhigh)*10
-  
+
   tp.high <- sort(abs(spikes[highIndex]),decreasing = TRUE)
   fp.high <- sapply(tp.high,function(k) sum(nulls>=k))
   tp.high <- seq(along=tp.high)/length(tp.high)*10
-  
+
   rownames(m) <- rownames(mat)
   rownames(a) <- rownames(mat)
   rownames(intended) <- genenames
- 
-  return(list(qs=apply(quants,1,mean),m=m,a=a,
+
+  return(list(qs=rowMeans(quants),m=m,a=a,
               spikein=spikein,intended=intended,num=num,denom=denom,
               fp.low=fp.low,        tp.low=tp.low,
               fp.medlow=fp.medlow,  tp.medlow=tp.medlow,
@@ -176,7 +176,7 @@ affycomp.compfig4c <- function(l,method.names=as.character(1:length(l)),
                                add.legend=TRUE,rotate=TRUE, main="Figure 4c"){
   xs <- c()
   ys <- c()
-  
+
   for(i in seq(along=l)){
     if(rotate){
       x <- as.numeric(l[[i]]$linex)[-c(1,2)]
@@ -196,7 +196,7 @@ affycomp.compfig4c <- function(l,method.names=as.character(1:length(l)),
   if(length(l)==1){ xs <- matrix(xs,nrow=1);ys <- matrix(ys,nrow=1); }
   plot(0,0,type="n",ylim=range(ys),xlim=range(xs),ylab=ylab,
        xlab="Log nominal concentration",main=main,las=1)
-  
+
   for(i in seq(along=l))
     lines(xs[i,],ys[i,],col=i+1,lty=i,lwd=3)
 
@@ -224,10 +224,10 @@ affycomp.compfig2b <- function(l,method.names=as.character(1:length(l)),
     ys <- rbind(ys,y)
   }
   plot(0,0,type="n",ylim=range(ys),xlim=range(xs),xlab="Average log expression",ylab="Log expression SD", main=main,las=1)
-  
+
   for(i in seq(along=l))
     lines(xs[i,],ys[i,],col=i+1,lty=i,lwd=3)
-  
+
   if(add.legend)
     legend(max(xs)*.7,max(ys)*.95,method.names,lwd=2,col=seq(along=l)+1,lty=seq(along=l))
 }
@@ -271,7 +271,7 @@ type=c("low","medlow","medhigh","high")){
     legend(XLIM[1]+.6*(XLIM[2]-XLIM[1]),
            YLIM[1]+.3*(YLIM[2]-YLIM[1]),
            method.names,col=2:(N+1),lty=1:N,lwd=1)
-  
+
 }
 
 affycomp.compfig5c <- function(l,method.names=as.character(1:length(l)),
@@ -330,7 +330,7 @@ affycomp.figure1b <- function(l,main="Figure 1b",xlim=NULL,ylim=NULL){
     ylim <- range(c(y,yy[unlist(tmplist)]),na.rm=TRUE,finite=TRUE)
   if(is.null(xlim))
     xlim <- range(c(x,xx[unlist(tmplist)]),na.rm=TRUE,finite=TRUE)
-  
+
   oo <- sample(1:length(x),12000) #pick a few so the plot isnt too busy
   plot(x[oo],y[oo],pch=".",xlim=xlim,ylim=ylim,main=main,xlab="A",ylab="M",
        las=1)
@@ -360,15 +360,15 @@ tableOverallSNR <- function(...,assessment.list=NULL,method.names=NULL,
                             ngenes=12626){
   if(is.null(assessment.list)) l<-list(...) else l <- assessment.list
   N <- length(l)
-  
+
   if(is.null(method.names)){
     method.names <- vector(mode="character",len=N)
     for(i in 1:N){
       tmp <- l[[i]]$method.name
       if(is.null(tmp)) method.names[i] <- i else method.names[i] <- tmp
     }
-  }  
-  
+  }
+
   results <- matrix(0,length(l),6)
   colnames(results) <- c("slope","R2","25thSD","medianSD","75thSD","Rank")
   rownames(results) <- method.names
@@ -390,14 +390,14 @@ tableLS <- function(...,assessment.list=NULL,method.names=NULL,
                             ngenes=12626,rank=TRUE){
   if(is.null(assessment.list)) l<-list(...) else l <- assessment.list
   N <- length(l)
-  
+
   if(is.null(method.names)){
     method.names <- vector(mode="character",len=N)
     for(i in 1:N){
       tmp <- l[[i]]$method.name
       if(is.null(tmp)) method.names[i] <- i else method.names[i] <- tmp
     }
-  }  
+  }
 
   results <- matrix(0,length(l[[1]]$LS$localslopes),N)
   colnames(results) <- method.names
@@ -420,8 +420,8 @@ tableLS <- function(...,assessment.list=NULL,method.names=NULL,
     return(results)
   }
 }
-                             
-     
+
+
 
 
 

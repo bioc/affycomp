@@ -8,7 +8,7 @@ affycomp <- function(d,s,method.name=NULL,verbose=TRUE,return.it=TRUE){
   if(return.it) return(l)
   else return(NULL)
 }
-        
+
 assessSpikeIn <- function(s,method.name=NULL,verbose=TRUE){
   if(verbose) cat("Performing 6 assessments that will take a few minutes")
   tmp1 <- assessFC(s,method.name=method.name)
@@ -27,7 +27,7 @@ assessAll <- function(d,s,method.name=NULL,verbose=TRUE){
   if(verbose) cat("Performing 9 assessments that will take a few minutes\nWe start with 3 on dilution data")
   tmp1 <- assessDilution(d,method.name=method.name)
   cat("...\n")
-  tmp2 <- assessSpikeIn(s,verbose=verbose,method.name=method.name) 
+  tmp2 <- assessSpikeIn(s,verbose=verbose,method.name=method.name)
   tmp <- c(Dilution=list(tmp1),tmp2)
   tmp["what"] <- "All"
   return(tmp)
@@ -45,31 +45,31 @@ assessDilution <- function(exprset,method.name=NULL){
   o <- as.matrix(o)
   rownames(o) <- NULL
   R2 <- apply(o,1,function(x) (cor((e[,x]))[1,2])^2)
-  
+
   ##average per concentration group
   tmp <- cbind(c(1.25,0,2.5,0,5,0,7.5,0,10,0,20,0),
                c(0,1.25,0,2.5,0,5,0,7.5,0,10,0,20))
   m <- apply(tmp,1,function(x){
     o <- which(pdata[,1]==x[1] & pdata[,2]==x[2])
-    apply(e[,o],1,mean)
-  })
+    rowMeans(e[,o])
+})
   ##sd per concentration group
   s <- apply(tmp,1,function(x){
     o <- which(pdata[,1]==x[1] & pdata[,2]==x[2])
     apply(e[,o],1,sd)
   })
-  
+
   ##we will "normalize" using the spike-in
   spikedin <- colnames(pdata)[-c(1:2,ncol(pdata))]
   for(j in 1:2){ ##1 is CNS and 2 liver
     Index <- tmp[,j]==0 ##first for liver
-    k <- apply(m[spikedin,Index],2,mean) ##these should be the same
+    k <- colMeans(m[spikedin, Index]) ## these should be the same
     k <- k-mean(k)##so let's make them the same
     m[,Index] <- sweep(m[,Index],2,k)
   }
-  
+
   ##regression coef for each gene for liver and cns. get slope
-     
+
   o <- which(tmp[,1]!=0)
   x <- log2(tmp[o,1])
   x <- x-mean(x)
@@ -80,11 +80,11 @@ assessDilution <- function(exprset,method.name=NULL){
   x <- x-mean(x)
   x2 <- sum(x^2)
   beta2 <- apply(m[,o],1,function(y) sum((y-mean(y))*x)/x2)
-  
+
   ##consistency
   fc1.25 <- m[,1]-m[,2]
   fc20 <- m[,11]-m[,12]
-  
+
   ##things to keep: curves, etc..
   ##sd vs mean plot
   x <- as.vector(m)
@@ -94,12 +94,13 @@ assessDilution <- function(exprset,method.name=NULL){
   y1 <- smooth1$fitted[order(x)][seq(1,length(x),length=100)]
   ##took out this plot. will keep actual points instead.
   ##beta vs mean plot
-  x <- apply(m,1,mean); x <- c(x,x)
+  x <- rowMeans(m)
+  x <- c(x,x)
   y <- c(beta1,beta2)
   smooth1 <- lm(y~ns(x,7))
   x2 <- sort(x)[seq(1,length(x),length=100)]
   y2 <- smooth1$fitted[order(x)][seq(1,length(x),length=100)]
-  
+
   list(R2=R2,sdplotx=x1,sdploty=y1,slopeplotx=x,slopeploty=y,
        mediansd=median(s),medianbeta=median( c(beta1,beta2)),
        fc1.25=fc1.25,fc20=fc20,
@@ -137,7 +138,7 @@ assessFC2 <- function(exprset,method.name=NULL){
     else
       stop("Not the right number of columns in expression matrix\n")
   }
-  
+
 
 
   if(WHICHSPIKEIN=="HGU95A"){
@@ -151,25 +152,25 @@ assessFC2 <- function(exprset,method.name=NULL){
     o1 <- seq(2,42,2)
     o2 <- seq(1,41,2)
   }
-  
+
   m <- e[,o1]-e[,o2]
   a <- (e[,o1] + e[,o2])/2
-  
+
   fc2 <- apply(m,2,function(x){
     tp <- sum(abs(x[match(colnames(pdata),names(x))]) >= 1) ##true positives
     fp <- sum(abs(x[-match(colnames(pdata),names(x))]) >= 1) ##false positives
     c(fp=fp,tp=tp)
   })
-  
+
   rocs <- apply(m,2,function(x){
     x <- sort(-abs(x))
     y <- rep(0,length(x))
     y[match(colnames(pdata),names(x))] <- 1
     return(cumsum(y)) ##this is number of true positive
   })
-  tp <- apply(rocs,1,mean)
+  tp <- rowMeans(rocs)
   fp <- seq(along=tp)-tp ##total calls minus true positives
-  
+
   N <- ncol(pdata)
   return(list(fc2=t(fc2),m=m,a=a,fp=fp,tp=tp,
               area=c(a10=mean(tp[fp<10]/N),
@@ -177,7 +178,7 @@ assessFC2 <- function(exprset,method.name=NULL){
                 a25=mean(tp[fp<25]/N),
                 a100=mean(tp[fp<100]/N)),what="FC2",method.name=method.name))
 }
-  
+
 
 assessFC <- function(exprset,method.name=NULL){
   e <- exprs(exprset)
@@ -193,7 +194,7 @@ assessFC <- function(exprset,method.name=NULL){
       stop("Not the right number of columns in expression matrix\n")
   }
 
-  
+
   genenames <- colnames(pdata)
   N <- length(genenames)
   M <- nrow(e) - N
@@ -218,8 +219,8 @@ assessFC <- function(exprset,method.name=NULL){
         intended[Count,,2] <- i2
         m <- e[,j]-e[,i]
         quantiles[Count,] <- quantile(m[-spikeindex],prob=probs)
-        fc2[Count,1] <- sum(abs(m[-spikeindex]) >= 1) 
-        fc2[Count,2] <- sum(abs(m[spikeindex]) >= 1) 
+        fc2[Count,1] <- sum(abs(m[-spikeindex]) >= 1)
+        fc2[Count,2] <- sum(abs(m[spikeindex]) >= 1)
         observed[Count,] <- m[genenames]
         m <- sort(-abs(m))
         y <- rep(0,length(m))
@@ -229,7 +230,7 @@ assessFC <- function(exprset,method.name=NULL){
     }
   }
 
-  
+
   for(i in (J+1):(2*J-1)){
     for(j in (i+1):(2*J)){
       i1 <- pdata[i,]
@@ -240,8 +241,8 @@ assessFC <- function(exprset,method.name=NULL){
         intended[Count,,2] <- i2
         m <- e[,j]-e[,i]
         quantiles[Count,] <- quantile(m[-spikeindex],prob=probs)
-        fc2[Count,1] <- sum(abs(m[-spikeindex]) >= 1) 
-        fc2[Count,2] <- sum(abs(m[spikeindex]) >= 1) 
+        fc2[Count,1] <- sum(abs(m[-spikeindex]) >= 1)
+        fc2[Count,2] <- sum(abs(m[spikeindex]) >= 1)
         observed[Count,] <- m[genenames]
         m <- sort(-abs(m))
         y <- rep(0,length(m))
@@ -268,8 +269,8 @@ assessFC <- function(exprset,method.name=NULL){
         intended[Count,,2] <- i2
         m <- e[,j]-e[,i]
         quantiles[Count,] <- quantile(m[-spikeindex],prob=probs)
-        fc2[Count,1] <- sum(abs(m[-spikeindex]) >= 1) 
-        fc2[Count,2] <- sum(abs(m[spikeindex]) >= 1) 
+        fc2[Count,1] <- sum(abs(m[-spikeindex]) >= 1)
+        fc2[Count,2] <- sum(abs(m[spikeindex]) >= 1)
         observed[Count,] <- m[genenames]
         m <- sort(-abs(m))
         y <- rep(0,length(m))
@@ -278,12 +279,12 @@ assessFC <- function(exprset,method.name=NULL){
       }
     }
   }
-  
+
   intended <- intended[1:Count,,]
   observed <- observed[1:Count,]
   fc2 <- fc2[1:Count,]
   quantiles <- quantiles[1:Count,]
-  quantiles <- apply(quantiles,2,mean)
+  quantiles <- colMeans(quantiles)
   tp <- roc/Count
   fp <- seq(along=tp)-tp ##total calls minus true positives
 
@@ -291,14 +292,14 @@ assessFC <- function(exprset,method.name=NULL){
   dimnames(intended) <- list(NULL,genenames,NULL)
   names(quantiles) <- c("lowest","lowest25","lowest100","25",
                      "75","highest100","highest25","highest")
-  
+
 
   intended.log.ratios <- log2(intended[,,2]/intended[,,1])
   x <- as.vector(intended.log.ratios)
   y <- as.vector(observed)
   Index <- as.vector(intended[,,2])<=2 & as.vector(intended[,,1])<=2 &
   as.vector(intended[,,2])>0 & as.vector(intended[,,1])>0 ##small signal
-  
+
   N <- ncol(pdata)
   list(signal=intended,
        intended.log.ratios=intended.log.ratios,
@@ -328,12 +329,12 @@ assessMA<- function(exprset,method.name=NULL){
     else
       stop("Not the right number of columns in expression matrix\n")
   }
-  
+
   N <- nrow(e)
   genenames <- colnames(pdata)
   spikeindex <- match(genenames,rownames(e))
   M <- length(genenames)
-  
+
   thearray <- 1
   if(WHICHSPIKEIN=="HGU95A"){
     thearray <- 1
@@ -359,7 +360,7 @@ assessMA<- function(exprset,method.name=NULL){
   colnames(m) <- colnames(e)[otherarrays]
   colnames(a) <- colnames(e)[otherarrays]
   colnames(intended) <- colnames(e)[otherarrays]
-  
+
   list(m=m,a=a,intended=intended,index=spikeindex,what="MA",method.name=method.name)
 }
 
@@ -367,13 +368,13 @@ assessSD <- function(exprset,method.name=NULL,logx=FALSE){
   e <- exprs(exprset)
   se <- se.exprs(exprset)
   pdata <- pData(exprset)
-  
+
   tmp <- cbind(c(1.25,0,2.5,0,5,0,7.5,0,10,0,20,0),
                c(0,1.25,0,2.5,0,5,0,7.5,0,10,0,20))
-  
+
   m <- apply(tmp,1,function(x){
     o <- which(pdata[,1]==x[1] & pdata[,2]==x[2])
-    apply(e[,o],1,mean)
+    rowMeans(e[,o])
   })
   ##sd per concentration group
   observed <- apply(tmp,1,function(x){
@@ -383,15 +384,15 @@ assessSD <- function(exprset,method.name=NULL,logx=FALSE){
 
   nominal <- apply(tmp,1,function(x){
     o <- which(pdata[,1]==x[1] & pdata[,2]==x[2])
-    sqrt(apply(se[,o]^2,1,mean))
-  })
+    sqrt(rowMeans(se[,o]^2))
+})
 
   tmp1 <- log2(as.vector(nominal))
   tmp2 <- log2(as.vector(observed))
   y <- tmp1-tmp2
   x <- as.vector(m)
   if(logx) x <- log2(x)
-  
+
   list(average.log.expression=x,log.ratio=y,what="SD",
        corr=cor(tmp1,tmp2),method.name=method.name)
 }
