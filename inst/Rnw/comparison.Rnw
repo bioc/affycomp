@@ -177,7 +177,7 @@ affycomp.figure6a(mas5.assessment$FC,main="a) MAS 5.0",ylim=c(-12,12))
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure6a(tmp.assessment$FC,main="a) RMA",ylim=c(-12,12))
+affycomp.figure6a(tmp.assessment$FC,main=paste("a)",tmp.assessment$method.name) ,ylim=c(-12,12))
 @
 \end{center}
   Figure 6a: Observed log fold changes plotted against
@@ -201,7 +201,7 @@ affycomp.figure6b(mas5.assessment$FC,main="b) MAS 5.0",ylim=c(-6,6))
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure6b(tmp.assessment$FC,main="b) RMA",ylim=c(-6,6))
+affycomp.figure6b(tmp.assessment$FC,main=paste("b)",tmp.assessment$method.name) ,ylim=c(-6,6))
 @
 \end{center}
 Figure 6b: Like 6a) but
