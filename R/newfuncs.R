@@ -2,7 +2,7 @@
 ##ASSESSMENTS
 #######
 remove.hgu133a.xhyb <- function(s,bp=c("200","150","100")){
-  bp <- match.arg(bp)  
+  bp <- match.arg(bp)
   bp <- paste("bp",bp,sep="")
   data(hgu133a.spikein.xhyb)
   out <- match(hgu133a.spikein.xhyb[[bp]],geneNames(s))
@@ -11,7 +11,7 @@ remove.hgu133a.xhyb <- function(s,bp=c("200","150","100")){
   else s <- s[-out,]
   return(s)
 }
-      
+
 assessSpikeIn2 <- function(s,method.name=NULL,verbose=TRUE){
   if(ncol(exprs(s))==59){
     s <- s[,c(1:13,17,21:33,37)]
@@ -29,8 +29,7 @@ assessSpikeIn2 <- function(s,method.name=NULL,verbose=TRUE){
 }
 
 assessSpikeInSD <- function(exprset,method.name=NULL,span=1/3){
-  require(splines,quietly = TRUE)
-  require(modreg,quietly = TRUE)
+  require("splines",quietly = TRUE)
   genenames <- colnames(pData(exprset))
   spikein <-match(genenames,geneNames(exprset))
   y <- esApply(exprset[-spikein,],1,sd)
@@ -81,24 +80,24 @@ assessLS <-  function(exprset,method.name=NULL){
   list(slope=fit1$coef[2],R2=summary(fit1)$r.squared,
        plotx=x,ploty=y,linex=names(tmp),liney=as.numeric(tmp),
        localslopes=localslope,localr2s=localr2,method.name=method.name,
-       low.slope=threeslopes[1,1], 
-       med.slope=threeslopes[2,1], 
+       low.slope=threeslopes[1,1],
+       med.slope=threeslopes[2,1],
        high.slope=threeslopes[3,1],
-       low.R2=threeslopes[1,2], 
-       med.R2=threeslopes[2,2], 
+       low.R2=threeslopes[1,2],
+       med.R2=threeslopes[2,2],
        high.R2=threeslopes[3,2],
        what="LS")
 }
 
 assessMA2<-function(exprset,method.name=NULL){
   mat <- exprs(exprset)
-  
+
   ##this is not good but works..
   mat <- exprs(exprset)
   if (ncol(mat) == 28) {
     WHICHSPIKEIN <- "HGU95A"
     NCOMP <- 91 * 2
-    I <-c(1:13,15:27)  
+    I <-c(1:13,15:27)
   }
   else {
     if (ncol(mat) == 42) {
@@ -118,7 +117,7 @@ assessMA2<-function(exprset,method.name=NULL){
   denom <- matrix(0, length(spikein), NCOMP)
   num <- matrix(0, length(spikein), NCOMP)
   count <- 0
-    
+
   for (i in I) {
     for (j in (i + 1): (14*ceiling(i/14))) {  #so j ends in 14,28,42
       count <- count + 1
@@ -168,7 +167,7 @@ assessMA2<-function(exprset,method.name=NULL){
   names(m)[1:(NCOMP*length(Index))] <- rep(rownames(mat)[Index],NCOMP)
   names(a)[1:(NCOMP*length(Index))] <- rep(rownames(mat)[Index],NCOMP)
 
-  return(list(qs = nulls, m = m, a = a, spikein = spikein, 
+  return(list(qs = nulls, m = m, a = a, spikein = spikein,
               intended = intended, num = num, denom = denom,
               fp.low=fp.low,  tp.low=tp.low,
               fp.med=fp.med,  tp.med=tp.med,
@@ -317,7 +316,7 @@ affycomp.figure1b <- function(l,main="Figure 1b",xlim=NULL,ylim=NULL,cex=.85,
   yy <- as.vector(y[Index])
   x <- as.vector(x[-Index])
   y <- as.vector(y[-Index])
-  
+
   if(all){
     fc <- as.character(l$intended)
     colors <- abs(l$intended)
@@ -338,7 +337,7 @@ affycomp.figure1b <- function(l,main="Figure 1b",xlim=NULL,ylim=NULL,cex=.85,
     text(xx[!o1 & !o2],yy[!o1&!o2],fc[!o1 & !o2],col=Colors[colors[!o1 & !o2]])
     text(xx[o1],yy[o1],expression(infinity),col="black")
     text(xx[o2],yy[o2],expression(-infinity),col="black")
-    
+
   }
   else{
     num <- as.vector(l$num); denom <- as.vector(l$denom)
@@ -350,16 +349,16 @@ affycomp.figure1b <- function(l,main="Figure 1b",xlim=NULL,ylim=NULL,cex=.85,
     tmplist[[3]] <- which(as.vector(num) >= 64 & as.vector(denom) >= 64&
                          abs(log2(as.vector(num)/as.vector(denom)))<=2)
 
-    
+
     if(is.null(ylim))
       ylim <- range(c(y,yy[unlist(tmplist)]),na.rm=TRUE,finite=TRUE)
     if(is.null(xlim))
       xlim <- range(c(x,xx[unlist(tmplist)]),na.rm=TRUE,finite=TRUE)
-    
-    
+
+
     plot(x,y,pch=".",xlim=xlim,ylim=ylim,main=main,xlab="A",ylab="M",
          las=1)
-    
+
     colors <- c("blue","darkgreen","red")
     FC <- as.character(l$intended)
     for(i in 1:length(tmplist)){
@@ -375,7 +374,7 @@ affycomp.figure1b <- function(l,main="Figure 1b",xlim=NULL,ylim=NULL,cex=.85,
     o <- abs(y)>1
     points((x)[o],(y)[o],pch=".",col="red")
   }
-  
+
 }
 
 
@@ -422,7 +421,7 @@ tableLS <- function(l,method.names=NULL){
   rownames(results) <- c("low.slope","med.slope","high.slope",
                          "low.R2","med.R2","high.R2",
                          paste(tmp[-1],tmp[-length(tmp)],sep=":"))
-  
+
   for(i in 1:N){
     results[1:6,i] <- unlist(l[[i]][10:15])
     results[-(1:6),i] <- l[[i]]$localslopes
@@ -443,7 +442,7 @@ tableSpikeInSD <- function(l,method.names=NULL){
     results[,i] <- quantile(l[[i]]$y,prob=c(0.25,0.5,0.75,0.99))
   return(results)
 }
-  
+
 tableMA2 <- function(l,method.names=NULL){
   N <- length(l)
   if(is.null(method.names)) method.names <- 1:N
