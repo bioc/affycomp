@@ -136,11 +136,11 @@ assessMA2 <- function (exprset, method.name = NULL)
     denom[, flip] = N2D
     Index <- spikein
 
-    lowIndex <- which(pmax(as.vector(num),as.vector(denom)) <= 2^1  &
+    lowIndex <- which(pmax(as.vector(num),as.vector(denom)) <= 2^2  &
                          abs(log2(as.vector(num)/as.vector(denom)))<=1)
     
     medIndex <- which(pmin(as.vector(num),as.vector(denom)) >= 2^2 &
-                         pmax(as.vector(num),as.vector(denom)) <= 2^5 &
+                         pmax(as.vector(num),as.vector(denom)) <= 2^6 &
                          abs(log2(as.vector(num)/as.vector(denom)))<=1)
     
     highIndex <- which(pmin(as.vector(num),as.vector(denom))>=2^6&
