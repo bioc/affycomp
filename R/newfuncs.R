@@ -65,8 +65,8 @@ assessLS <-  function(exprset,method.name=NULL){
   }
 
   tmplist <- list()
-  tmplist[[1]]   <- which(x <= 0)
-  tmplist[[2]]  <- which(x >= 1 & x <= 5)
+  tmplist[[1]]   <- which(x <= 1)
+  tmplist[[2]]  <- which(x >= 2 & x <= 5)
   tmplist[[3]]   <- which(x>=6)
 
   threeslopes <- matrix(0,length(tmplist),2) #2 columns: slope and R^2
