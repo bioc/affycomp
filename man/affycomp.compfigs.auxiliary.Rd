@@ -45,7 +45,7 @@ affycomp.compfig5b(l, method.names = as.character(1:length(l)),
 
 affycomp.compfig5cde(l, method.names = as.character(1:length(l)),
                   add.legend = TRUE, main = "Figure 5c", maxfp=100,
-                  type=c("low","med","high")
+                  type=c("low","med","high"))
 
 affycomp.compfig5c(l, method.names = as.character(1:length(l)),
                   add.legend = TRUE, main = "Figure 5c", maxfp=100)
