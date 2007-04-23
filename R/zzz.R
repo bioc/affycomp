@@ -1,17 +1,9 @@
-.onAttach <- function(libname, pkgname, where) {
+.onLoad <- function(libname, pkgname) require("methods")
 
+.onAttach <- function(libname, pkgname) {
 
-  where <- match(paste("package:", pkgname, sep=""), search())
-
-  require(Biobase, quietly=TRUE) ##Biobase uses methods
-
-    if(.Platform$OS.type == "windows" && require(Biobase) && interactive()
-        && .Platform$GUI ==  "Rgui"){
+    if (.Platform$OS.type == "windows" && interactive()
+        && .Platform$GUI == "Rgui") {
         addVigs2WinMenu("affycomp")
     }
-
-
-
-  cacheMetaData(as.environment(where))
-
 }
