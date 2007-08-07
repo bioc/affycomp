@@ -6,7 +6,7 @@
 \alias{affycomp.compfigs}
 \title{Assessment Plots}
 \description{
-Function that makes assessment plot}
+Function that makes assessment plot
 }
 \usage{
 affycompPlot(...,assessment.list=NULL,method.names=NULL,

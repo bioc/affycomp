@@ -4,7 +4,7 @@
 \title{Remove crosshybridizers}
 \description{
 This functions removes possible cross hybridizers from Affymetrix
-HGU133A spike-in experiment}
+HGU133A spike-in experiment
 }
 \usage{
 remove.hgu133a.xhyb(s, bp = c("200", "150", "100"))

@@ -26,7 +26,7 @@ are removed from the HGU133A spikein. See \code{\link{remove.hgu133a.xhyb}}.}
  things in the right place.
 
  \code{read.newspikein} is a wrapper to read results from the hgu133a
-spikein experiment.}
+spikein experiment.
 }
 \value{An \code{\link[Biobase]{exprSet}}.
 }

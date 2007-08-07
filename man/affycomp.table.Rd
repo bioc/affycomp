@@ -66,8 +66,7 @@ tableRanks(...,assessment.list=NULL,method.names=NULL,ngenes=12626,rank=TRUE)
 }
 \value{
   A matrix. One column per each method and one row for each comparison.
-
-tableOverallSNR is an exception. Where rows represnt methods.}
+  tableOverallSNR is an exception. Where rows represnt methods.
 }
 \author{Rafael A. Irizarry}
 \examples{
