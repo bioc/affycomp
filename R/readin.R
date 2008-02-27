@@ -1,7 +1,7 @@
 read.spikein <- function(filename,cdfName=c("hgu95a","hgu133a"),
                          remove.xhyb=TRUE){
 #######################################################
-###prep spike in exprSet
+###prep spike in ExpressionSet
 #######################################################
   cdfName <- match.arg(cdfName)
   s <- read.csv(filename,check.names=FALSE,row.names=1)
@@ -22,7 +22,7 @@ read.spikein <- function(filename,cdfName=c("hgu95a","hgu133a"),
   }
   ##putit in order
   s <- s[,rownames(pData(pd))]
-  s <- new("exprSet",exprs=as.matrix(s),phenoData=pd)
+  s <- new("ExpressionSet",exprs=as.matrix(s),phenoData=pd)
   s <- exprset.log(s) ##take log
   if(remove.xhyb & cdfName=="hgu133a") s <- remove.hgu133a.xhyb(s)
   return(s)
@@ -33,7 +33,7 @@ read.newspikein <- function(filename)
                                                   
 read.dilution <- function(filename){
 #######################################################
-###prep dilution exprSet
+###prep dilution ExpressionSet
 #######################################################
   d <- read.csv(filename,check.names=FALSE,row.names=1)
   
@@ -47,7 +47,7 @@ read.dilution <- function(filename){
   data(dilution.phenodata)
   ##putit in order
   d <- d[,rownames(pData(dilution.phenodata))]
-  d <- new("exprSet",exprs=as.matrix(d),phenoData=dilution.phenodata)
+  d <- new("ExpressionSet",exprs=as.matrix(d),phenoData=dilution.phenodata)
   d <- exprset.log(d) ##take log
   return(d)
 }
@@ -60,4 +60,4 @@ exprset.log <- function(exprset){
     e[o] <- min(e[!o])
     exprset@exprs <- e
     return(exprset)
-  }
+}

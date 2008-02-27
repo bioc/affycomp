@@ -11,13 +11,12 @@ remove.hgu133a.xhyb(s, bp = c("200", "150", "100"))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{s}{an \code{exprSet} containing the HGU133A spike-in}
+  \item{s}{an \code{ExpressionSet} containing the HGU133A spike-in}
   \item{bp}{number of base pair matches needed to define a possible
     cross hybridizer}
 }
 \details{Some details are contained in the help file for \code{\link{hgu133a.spikein.xhyb}}}
-
 \value{
-  An \code{exprSet} with probeset removed}
+  An \code{ExpressionSet} with probeset removed}
 \seealso{ \code{\link{hgu133a.spikein.xhyb}}}
 \keyword{manip}

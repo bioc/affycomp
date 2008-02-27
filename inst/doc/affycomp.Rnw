@@ -33,9 +33,8 @@ library(affycomp)
 \section{Introduction}
 The defining feature of 
 oligonucleotide expression arrays is the use of several probes to
-assay each targeted transcript.  This is  
-a bonanza for the statistical geneticist, offering a great opportunity
-to create probeset summaries with
+assay each targeted transcript.  This is a bonanza for the statistical
+geneticist, offering a great opportunity to create probeset summaries with
 specific characteristics. There are now several methods available
 for summarizing probe level data from the popular Affymetrix
 GeneChips. It is  harder to identify the method best suited to a given
@@ -52,22 +51,20 @@ Those features highlighted in our suite of graphs are justified by
 questions of biological interest, and motivated by the presence of
 appropriate data. 
 
-The benchmark data used is freely
-available to the public.  The assessment data sets are the following:
+The benchmark data used is freely available to the public.
+The assessment data sets are the following:
 For the  dilution study by
 \url{http://qolotus02.genelogic.com/datasets.nsf/}{GeneLogic}, two 
 sources of cRNA, human liver tissue and central nervous system cell
-line (CNS), were hybridized  
-to human arrays (HG-U95Av2) in a range of dilutions and proportions
-\cite{RMA}. 
+line (CNS), were hybridized to human arrays (HG-U95Av2) in a range
+of dilutions and proportions \cite{RMA}. 
 
 For the spike-in study, different cRNA fragments were added to the 
 hybridization mixture of the arrays at different picoMolar
-concentrations. The cRNAs were  
-spiked-in at a different concentration on each array (apart from
-replicates) arranged in a cyclic Latin square design with each
-concentration appearing once in each row and column. All arrays had a
-common background cRNA. The data can be obtained form
+concentrations. The cRNAs were spiked-in at a different concentration
+on each array (apart from replicates) arranged in a cyclic Latin square
+design with each concentration appearing once in each row and column.
+All arrays had a common background cRNA. The data can be obtained form
 \url{http://www.affymetrix.com/analysis/download_center2.affx}.
 
 
@@ -76,14 +73,14 @@ Two phenoData objects are included in the package that give more details:
 
 \section{What's new in version 1.2?}
 A new sets of assessment has been added. The wrapper is called 
-\verb+assessSpikeIn2+ and one can send it a exprSet with the spikein as 
-\verb+assessSpikeIn+ but it only uses culumnes 1,...,13,17 and 21,...,33,37. 
+\verb+assessSpikeIn2+ and one can send it an \verb+ExpressionSet+ with the spikein as 
+\verb+assessSpikeIn+ but it only uses columns 1,...,13,17 and 21,...,33,37. 
 So one only needs to get expression measures for these 28 arrays if one plans 
 to only use \verb+assessSpikeIn2+. The engine functions are \verb+assessLS+, 
 \verb+assessSpikeInSD+, and \verb+assessMA2+.
  
-All spike in related assessments now work with both the HGU95A (this is the one used in version 1.1) and HGU133A. The function \verb+read.newspikein+ will 
-read the HGU133A expression values. 
+All spike in related assessments now work with both the HGU95A (this is the one used in version 1.1) and HGU133A.
+The function \verb+read.newspikein+ will read the HGU133A expression values. 
 
 \section{The Image Report}
 If you have a file named \verb+dilfilename.csv+ with the dilution
@@ -95,12 +92,11 @@ summary statistics in the image report:
 R> library(affycomp) ##load the affy package
 R> d <- read.dilution("dilfilename.csv")
 R> s <- read.spikein("sifilename.csv")
-R> rma.assessment <- affycomp(d,s,method.name="RMA")
+R> rma.assessment <- affycomp(d, s, method.name="RMA")
 \end{Sinput}
 
 \verb+res+ will have the necessary information to recreate the graphs
 without having to wait for the assessment. See below.
-
 
 \verb+affycomp+ is a wrapper for other \verb+assessAll+ and
 \verb+affycompTable+. Here are some examples based
@@ -111,7 +107,7 @@ data(rma.assessment)
 @ 
 
 were created using the function \verb+assessAll+ on
-\verb+exprSet+s created using the RMA and MAS 5.0 methods. 
+\verb+ExpressionSet+s created using the RMA and MAS 5.0 methods. 
 These are lists of lists. 
 
 <<>>=
@@ -164,13 +160,11 @@ specific assessment list
 affycomp.figure2(mas5.assessment$Dilution)
 @
 \end{center}
-  {Figure 2:   For each gene,
-  and each experimental condition, we calculate the mean log
-  expression and the observed standard deviation across   5
-  replicates. The
-  resulting scatterplot is smoothed to generate a single curve
-  representing mean standard deviation as a function of mean log
-  expression.}
+  {Figure 2:   For each gene, and each experimental condition, we
+  calculate the mean log expression and the observed standard
+  deviation across 5 replicates. The resulting scatterplot is smoothed
+  to generate a single curve representing mean standard deviation as
+  a function of mean log expression.}
 \end{figure}
 
 
@@ -185,8 +179,8 @@ affycomp.figure3(mas5.assessment$Dilution)
   abundance.  Average log fold-changes between liver and CNS for the
   lowest concentration and the   highest in the dilution data set are
   computed.  Orange and red color is used to denote genes with
-$M_{6g}-M_{1g}$ bigger than $\log_2(2)$ and $\log_2(3)$
-respectively. The rest are denoted with black.}
+  $M_{6g}-M_{1g}$ bigger than $\log_2(2)$ and $\log_2(3)$
+  respectively. The rest are denoted with black.}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -213,9 +207,8 @@ affycomp.figure5a(mas5.assessment$FC)
 affycomp.figure5b(mas5.assessment$FC)
 @
 \end{center}
-  {Figure 5: A typical identification rule for differential
-      expression filters
-      genes with fold change exceeding a given threshold.
+  {Figure 5: A typical identification rule for differential expression
+      filters genes with fold change exceeding a given threshold.
       This figure shows average ROC curves  which offer a graphical
       representation of both specificity and sensitivity for such a
       detection rule. a) Average ROC curves based on comparisons with
@@ -248,7 +241,7 @@ You can use \verb+affycompPlot+ which will automatically know what to do
 \begin{center}
 <<fig=TRUE>>=
 par(mfrow=c(2,1))
-affycompPlot(mas5.assessment$MA,rma.assessment$MA)
+affycompPlot(mas5.assessment$MA, rma.assessment$MA)
 @
 \end{center}
 {Figure 1: The MA plot shows log fold change as a function of
@@ -267,42 +260,40 @@ specific assessment list
 \begin{figure}[htbp]
 \begin{center}
 <<fig=TRUE>>=
-affycomp.compfig2(list(mas5.assessment$Dilution,rma.assessment$Dilution),
+affycomp.compfig2(list(mas5.assessment$Dilution, rma.assessment$Dilution),
                   method.names=c("MAS 5.0","RMA"))
 @
 \end{center}
-  {Figure 2:   For each gene,
-  and each experimental condition, we calculate the mean log
-  expression and the observed standard deviation across   5
-  replicates. The
-  resulting scatterplot is smoothed to generate a single curve
-  representing mean standard deviation as a function of mean log
-  expression.}
+  {Figure 2:   For each gene, and each experimental condition,
+  we calculate the mean log expression and the observed standard
+  deviation across 5 replicates. The resulting scatterplot is
+  smoothed to generate a single curve representing mean standard
+  deviation as a function of mean log expression.}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
 <<fig=TRUE>>=
-affycomp.compfig3(list(mas5.assessment$Dilution,rma.assessment$Dilution),
+affycomp.compfig3(list(mas5.assessment$Dilution, rma.assessment$Dilution),
                   method.names=c("MAS 5.0","RMA"))
 @
 \end{center}
 {Figure 3: This plot, using the GeneLogic dilution data,
   shows the sensitivity of fold change calculations to total RNA
   abundance.  Average log fold-changes between liver and CNS for the
-  lowest concentration and the   highest in the dilution data set are
+  lowest concentration and the highest in the dilution data set are
   computed.  Orange and red color is used to denote genes with
-$M_{6g}-M_{1g}$ bigger than $\log_2(2)$ and $\log_2(3)$
-respectively. The rest are denoted with black.}
+  $M_{6g}-M_{1g}$ bigger than $\log_2(2)$ and $\log_2(3)$
+  respectively. The rest are denoted with black.}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
 <<fig=TRUE>>=
 par(mfrow=c(2,1))
-affycomp.compfig4a(list(mas5.assessment$Signal,rma.assessment$Signal),
+affycomp.compfig4a(list(mas5.assessment$Signal, rma.assessment$Signal),
                   method.names=c("MAS 5.0","RMA"))
-affycomp.compfig4b(list(mas5.assessment$Dilution,rma.assessment$Dilution),
+affycomp.compfig4b(list(mas5.assessment$Dilution, rma.assessment$Dilution),
                   method.names=c("MAS 5.0","RMA"))
 @
 \end{center}
@@ -318,15 +309,14 @@ affycomp.compfig4b(list(mas5.assessment$Dilution,rma.assessment$Dilution),
 \begin{center}
 <<fig=TRUE>>=
 par(mfrow=c(2,1))
-affycomp.compfig5a(list(mas5.assessment$FC,rma.assessment$FC),
+affycomp.compfig5a(list(mas5.assessment$FC, rma.assessment$FC),
                   method.names=c("MAS 5.0","RMA"))
-affycomp.compfig5b(list(mas5.assessment$FC2,rma.assessment$FC2),
+affycomp.compfig5b(list(mas5.assessment$FC2, rma.assessment$FC2),
                   method.names=c("MAS 5.0","RMA"))
 @
 \end{center}
-  {Figure 5: A typical identification rule for differential
-      expression filters
-      genes with fold change exceeding a given threshold.
+  {Figure 5: A typical identification rule for differential expression
+      filters genes with fold change exceeding a given threshold.
       This figure shows average ROC curves  which offer a graphical
       representation of both specificity and sensitivity for such a
       detection rule. a) Average ROC curves based on comparisons with
@@ -338,10 +328,10 @@ affycomp.compfig5b(list(mas5.assessment$FC2,rma.assessment$FC2),
 \begin{center}
 <<fig=TRUE>>=
 par(mfrow=c(2,2))
-affycomp.figure6a(mas5.assessment$FC,main="a) MAS 5.0",ylim=c(-12,12))
-affycomp.figure6a(rma.assessment$FC,main="a) RMA",ylim=c(-12,12))
-affycomp.figure6b(mas5.assessment$FC,main="b) MAS 5.0",ylim=c(-6,6))
-affycomp.figure6b(rma.assessment$FC,main="b) RMA",ylim=c(-6,6))
+affycomp.figure6a(mas5.assessment$FC, main="a) MAS 5.0", ylim=c(-12,12))
+affycomp.figure6a(rma.assessment$FC, main="a) RMA", ylim=c(-12,12))
+affycomp.figure6b(mas5.assessment$FC, main="b) MAS 5.0", ylim=c(-6,6))
+affycomp.figure6b(rma.assessment$FC, main="b) RMA", ylim=c(-6,6))
 @
 \end{center}
   {Figure 6: a) Observed log fold changes plotted against
@@ -358,30 +348,29 @@ The function \verb+tableAll+ returns a matrix with assessment
 statistics. Once the assessment function are run all one needs to type
 is 
 
-
 <<>>=
 data(rma.assessment)
 data(mas5.assessment)
-tableAll(rma.assessment,mas5.assessment)
+tableAll(rma.assessment, mas5.assessment)
 @ 
 
 The function \verb+affycompTable+ make a minimal table (that is also
 more informative).
 
 <<>>=
-affycompTable(rma.assessment,mas5.assessment)
+affycompTable(rma.assessment, mas5.assessment)
 @ 
 
 \subsection{Standard deviation assessment}
 The package also contains a simple tool to assess standard error
-estimates. For this to work the \verb+exprSet+ object used for the
+estimates. For this to work the \verb+ExpressionSet+ object used for the
 assessment must have standard error estimates for the dilution data.
 We include two examples in the package.
 
 <<>>=
 data(rma.sd.assessment)
 data(lw.sd.assessment)
-tableAll(rma.sd.assessment,lw.sd.assessment)
+tableAll(rma.sd.assessment, lw.sd.assessment)
 @ 
 
 For the SD assessment, there are also comparison plots as well as
@@ -390,15 +379,14 @@ simple plots.
 \begin{figure}[htbp]
 \begin{center}
 <<fig=TRUE>>=
-affycompPlot(lw.sd.assessment,rma.sd.assessment)
+affycompPlot(lw.sd.assessment, rma.sd.assessment)
 @
 \end{center}
 {Figure 7:  Using the replicates from the dilution data, we calculate the mean
   predicted variance for each gene, tissue and dilution by squaring
   the estimated standard error.  The usual sample variance  $s^2_{tdg}
-  = \sum_r (y_{tdrg} - y_{td\cdot g})^2/4$ are calculated as
-  well. These boxplots are of the log ratios of the predicted and  
-  observed variance.
+  = \sum_r (y_{tdrg} - y_{td\cdot g})^2/4$ are calculated as well.
+  These boxplots are of the log ratios of the predicted and observed variance.
 }
 \end{figure}
 
@@ -412,9 +400,8 @@ affycompPlot(lw.sd.assessment)
 {Figure 7:  Using the replicates from the dilution data, we calculate the mean
   predicted variance for each gene, tissue and dilution by squaring
   the estimated standard error.  The usual sample variance  $s^2_{tdg}
-  = \sum_r (y_{tdrg} - y_{td\cdot g})^2/4$ are calculated as
-  well. These boxplots are of the log ratios of the predicted and  
-  observed variance.
+  = \sum_r (y_{tdrg} - y_{td\cdot g})^2/4$ are calculated as well.
+  These boxplots are of the log ratios of the predicted and observed variance.
 }
 \end{figure}
 

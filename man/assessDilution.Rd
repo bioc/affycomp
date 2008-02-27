@@ -1,22 +1,19 @@
 \name{assessDilution}
 \alias{assessDilution}
 
-
 \title{Assessment functions for Dilution Data}
 \description{
-  Assessment functoion.
+  Assessment function.
   Takes an
-  \code{\link[Biobase]{exprSet-class}} and returns a list with necessary
+  \code{\link[Biobase]{ExpressionSet-class}} and returns a list with necessary
   information to create assessment plots.}
 \usage{
 assessDilution(exprset,method.name=NULL)
-
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{
-  \item{exprset}{An \code{\link[Biobase]{exprSet-class}} containing
-     exrpession measures for 
-    Affymetrix's spike-in experiment.}
+  \item{exprset}{An \code{\link[Biobase]{ExpressionSet-class}} containing
+     expression measures for Affymetrix's spike-in experiment.}
   \item{method.name}{Name of expression measure being assessed.}
 }
 \details{
@@ -27,7 +24,4 @@ assessDilution(exprset,method.name=NULL)
   Lists with the necessary information to make the Figures.
 }
 \author{Rafael A. Irizarry}
-
 \keyword{manip}
-
-

@@ -5,8 +5,8 @@
 \alias{read.dilution}
 \title{Read Expression Date Sets}
 \description{
-Reads a comma delimeted file containing the expression values of the
-dilution and spike-in data sets and creates a \code{\link[Biobase]{exprSet}}
+Reads a comma-delimited file containing the expression values of the
+dilution and spike-in data sets and creates a \code{\link[Biobase]{ExpressionSet}}
 }
 \usage{
 read.dilution(filename)
@@ -20,15 +20,15 @@ read.newspikein(filename)
 are removed from the HGU133A spikein. See \code{\link{remove.hgu133a.xhyb}}.}
 }
 \details{
- The file to be read must be come delimeted with the first row
- containing the cel fileneames (case sensitive). The first column must
+ The file to be read must be comma-delimited with the first row
+ containing the cel filenames (case sensitive). The first column must
  be the Affymetrix gene identifiers. \code{read.dilution} will put
  things in the right place.
 
  \code{read.newspikein} is a wrapper to read results from the hgu133a
 spikein experiment.
 }
-\value{An \code{\link[Biobase]{exprSet}}.
+\value{An \code{\link[Biobase]{ExpressionSet}}.
 }
 \author{Rafael A. Irizarry}
 \keyword{manip}
