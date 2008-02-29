@@ -366,7 +366,7 @@ assessMA<- function(exprset,method.name=NULL){
 
 assessSD <- function(exprset,method.name=NULL,logx=FALSE){
   e <- exprs(exprset)
-  se <- se.exprs(exprset)
+  se <- assayDataElement(exprset,"se.exprs")
   pdata <- pData(exprset)
 
   tmp <- cbind(c(1.25,0,2.5,0,5,0,7.5,0,10,0,20,0),

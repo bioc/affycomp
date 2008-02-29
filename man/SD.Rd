@@ -24,9 +24,9 @@ tableSD(l,method.names=NULL)
 }
 \details{
   This uses the dilution data. The exprsets need to have standard error
-  estimates in the \code{se.exprs} slot. Read the vignette for more
-  details. The functions work similarly to those assessing expression
-  measures.
+  estimates in the \code{assayDataElement(exprset,"se.exprs")}. Read the
+  vignette for more details. The functions work similarly to those assessing
+  expression measures.
 
   All these files need the result of \code{\link{assessSD}}
 }
@@ -39,5 +39,3 @@ affycomp.compfig7(list(rma.sd.assessment,lw.sd.assessment))
 affycomp.figure7(rma.sd.assessment)
 }
 \keyword{manip}
-
-
