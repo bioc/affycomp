@@ -4,7 +4,7 @@
 remove.hgu133a.xhyb <- function(s,bp=c("200","150","100")){
   bp <- match.arg(bp)
   bp <- paste("bp",bp,sep="")
-  data(hgu133a.spikein.xhyb)
+  hgu133a.spikein.xhyb <- getData("hgu133a.spikein.xhyb")
   out <- match(hgu133a.spikein.xhyb[[bp]],geneNames(s))
 
   if(any(is.na(out))) warning("No probesets removed. Make sure you are using the hgu133a spikein ExpressionSet or that you didnt already remove the xbybs.")

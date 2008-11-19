@@ -7,3 +7,15 @@
         addVigs2WinMenu("affycomp")
     }
 }
+
+## Fixing 'no visible' notes
+.myDataEnv <- new.env(parent=emptyenv())
+
+isLoaded <- function(dataset)
+  exists(dataset, .myDataEnv)
+
+getData <- function(dataset){
+  if (!isLoaded(dataset))
+    data(list=dataset, envir=.myDataEnv)
+  .myDataEnv[[dataset]]
+}

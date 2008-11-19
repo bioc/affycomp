@@ -13,15 +13,15 @@ read.spikein <- function(filename,cdfName=c("hgu95a","hgu133a"),
   colnames(s) <- samplenames
   ##read phenodata
   if(cdfName=="hgu95a"){
-    data(spikein.phenodata)
+    spikein.phenodata <- getData("spikein.phenodata")
     pd <- spikein.phenodata
   }
   if(cdfName=="hgu133a"){
-    data(hgu133a.spikein.phenodata)
+    hgu133a.spikein.phenodata <- getData("hgu133a.spikein.phenodata")
     pd <- hgu133a.spikein.phenodata  
   }
   ##putit in order
-  s <- s[,rownames(pData(pd))]
+  s <- s[, sampleNames(pd)]
   s <- new("ExpressionSet",exprs=as.matrix(s),phenoData=pd)
   s <- exprset.log(s) ##take log
   if(remove.xhyb & cdfName=="hgu133a") s <- remove.hgu133a.xhyb(s)
@@ -44,9 +44,9 @@ read.dilution <- function(filename){
   samplenames <- sub("\\.cel$","",samplenames,ignore.case=TRUE)
   colnames(d) <- samplenames
   ##read phenodata
-  data(dilution.phenodata)
+  dilution.phenodata <- getData("dilution.phenodata")
   ##putit in order
-  d <- d[,rownames(pData(dilution.phenodata))]
+  d <- d[,sampleNames(dilution.phenodata)]
   d <- new("ExpressionSet",exprs=as.matrix(d),phenoData=dilution.phenodata)
   d <- exprset.log(d) ##take log
   return(d)
@@ -58,6 +58,6 @@ exprset.log <- function(exprset){
     e <- log2(e)
     o <- abs(e)==Inf | is.na(e)
     e[o] <- min(e[!o])
-    exprset@exprs <- e
+    exprs(exprset) <- e
     return(exprset)
 }

@@ -1,7 +1,7 @@
 affycomp <- function(d,s,method.name=NULL,verbose=TRUE,return.it=TRUE){
   if(is.null(method.name)) method.name <- "New expression measure"
   l <- assessAll(d,s,method.name=method.name,verbose=verbose)
-  data(mas5.assessment)
+  mas5.assessment <- getData("mas5.assessment")
   affycompPlot(mas5.assessment,l)
   tmp <- affycompTable(mas5.assessment,l)
   print(format(tmp,digits=2))
@@ -114,7 +114,9 @@ assessSignal <- function(exprset,method.name=NULL){
   e <- exprs(exprset)
   pdata <- pData(exprset)
   genenames <- colnames(pdata)
-  y <- as.vector(t(e[match(genenames,geneNames(exprset)),]))
+  ## BC: 11/19/2008
+  ## y <- as.vector(t(e[match(genenames,geneNames(exprset)),]))
+  y <- as.vector(t(e[match(genenames, featureNames(exprset)),]))
   names(y) <- rep(colnames(pdata),nrow(pdata))
   x <- log2(as.vector(as.matrix(pdata)))
   names(x) <- names(y)
