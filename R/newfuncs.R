@@ -5,7 +5,7 @@ remove.hgu133a.xhyb <- function(s,bp=c("200","150","100")){
   bp <- match.arg(bp)
   bp <- paste("bp",bp,sep="")
   hgu133a.spikein.xhyb <- getData("hgu133a.spikein.xhyb")
-  out <- match(hgu133a.spikein.xhyb[[bp]],geneNames(s))
+  out <- match(hgu133a.spikein.xhyb[[bp]],featureNames(s))
 
   if(any(is.na(out))) warning("No probesets removed. Make sure you are using the hgu133a spikein ExpressionSet or that you didnt already remove the xbybs.")
   else s <- s[-out,]
@@ -31,7 +31,7 @@ assessSpikeIn2 <- function(s,method.name=NULL,verbose=TRUE){
 assessSpikeInSD <- function(exprset,method.name=NULL,span=1/3){
   require("splines",quietly = TRUE)
   genenames <- colnames(pData(exprset))
-  spikein <-match(genenames,geneNames(exprset))
+  spikein <-match(genenames,featureNames(exprset))
   y <- esApply(exprset[-spikein,],1,sd)
   x <- esApply(exprset[-spikein,],1,mean)
   smooth1 <- loess(y~x,span=span,family="gaussian",degree=1)
@@ -45,7 +45,7 @@ assessLS <-  function(exprset,method.name=NULL){
   e <- exprs(exprset)
   pdata <- pData(exprset)
   genenames <- colnames(pdata)
-  y <- as.vector(t(e[match(genenames,geneNames(exprset)),]))
+  y <- as.vector(t(e[match(genenames,featureNames(exprset)),]))
   names(y) <- rep(colnames(pdata),rep(nrow(pdata),ncol(pdata)))
   x <- log2(as.vector(as.matrix(pdata)))
   names(x) <- names(y)
@@ -107,7 +107,7 @@ assessMA2 <- function (exprset, method.name = NULL)
     }
     pdata <- pData(exprset)
     genenames <- colnames(pdata)
-    spikein <- match(genenames, geneNames(exprset))
+    spikein <- match(genenames, featureNames(exprset))
     quants <- matrix(0, nrow(mat) - length(spikein), NCOMP)
     m <- matrix(0, nrow(mat), NCOMP)
     a <- matrix(0, nrow(mat), NCOMP)
