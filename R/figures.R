@@ -176,7 +176,8 @@ affycomp.figure6a <-function(l,main="Figure 6a",xlim=NULL,ylim=NULL){
   y <- l$observed.log.ratios
   if(is.null(ylim)) ylim <- range(y,na.rm=TRUE,finite=TRUE)
   if(is.null(xlim)) xlim <- range(x,na.rm=TRUE,finite=TRUE)
-  matplot(x,y,xlab="Nominal log ratio",ylab="observed log ratio",main=main,pch=1:ncol(x),xlim=xlim,ylim=ylim)
+  matplot(x, y, xlab="Nominal log ratio", ylab="observed log ratio",
+          main=main, xlim=xlim, ylim=ylim)
   tmp <- tapply(y,x,mean)
   lines(as.numeric(names(tmp)),tmp,lwd=3)
    hs <- l$quantiles
