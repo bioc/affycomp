@@ -14,5 +14,5 @@ three components of the list.
 }
 \usage{data(hgu133a.spikein.xhyb)}
 \format{A list}
-\source{Simon Cawley \verb+<simon_cawley@affymetrix.com>+}
+\source{Simon Cawley <simon_cawley@affymetrix.com>}
 \keyword{datasets}
