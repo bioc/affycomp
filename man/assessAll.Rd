@@ -5,8 +5,8 @@
 \description{
   Assessment functions.
   Takes a couple of 
-  \code{\link[Biobase]{ExpressionSet-class}}, one for spike in another for the
-  dilution and returns a list with necessary
+  \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}}, one for
+  spike in another for the dilution and returns a list with necessary
   information to create assessment plots.}
 \usage{
 assessAll(d,s,method.name=NULL,verbose=TRUE)
@@ -15,10 +15,11 @@ affycomp(d,s,method.name=NULL,verbose=TRUE,return.it=TRUE)
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{
-    \item{d}{An \code{\link[Biobase]{ExpressionSet-class}} containing
-    the expression measures for the Gene Logic's dilution experiment.}
-  \item{s}{An \code{\link[Biobase]{ExpressionSet-class}} containing
-    expression measures for the Affymetrix's spike-in experiment.}
+    \item{d}{An \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}}
+      containing 
+      the expression measures for the Gene Logic's dilution experiment.}
+  \item{s}{An \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}}
+    containing expression measures for the Affymetrix's spike-in experiment.}
   \item{method.name}{Name of expression measure being assessed.}
   \item{verbose}{verbosity flag.}
 \item{return.it}{if \code{TRUE} returns assessment lists.}  

@@ -3,16 +3,16 @@
 
 \title{Assessment functions for Dilution Data}
 \description{
-  Assessment function.
-  Takes an
-  \code{\link[Biobase]{ExpressionSet-class}} and returns a list with necessary
-  information to create assessment plots.}
+  Assessment function. Takes an
+  \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} and returns a
+  list with necessary information to create assessment plots.}
 \usage{
 assessDilution(exprset,method.name=NULL)
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{
-  \item{exprset}{An \code{\link[Biobase]{ExpressionSet-class}} containing
+  \item{exprset}{An
+    \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} containing 
      expression measures for Affymetrix's spike-in experiment.}
   \item{method.name}{Name of expression measure being assessed.}
 }

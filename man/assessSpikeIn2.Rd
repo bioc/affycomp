@@ -8,20 +8,21 @@
 \description{
   These functions are assessment functions.
   Each takes an
-  \code{\link[Biobase]{ExpressionSet-class}} and returns a list with necessary
+  \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} and returns a
+  list with necessary 
   information to create assessment plots.}
 \usage{
-assessSpikeIn2(s,method.name=NULL,verbose=TRUE)
-
-assessSpikeInSD(exprset,method.name=NULL,span=1/3)
-assessLS(exprset,method.name=NULL)
-assessMA2(exprset,method.name=NULL)
+assessSpikeIn2(s, method.name=NULL, verbose=TRUE)
+assessSpikeInSD(exprset, method.name=NULL, span=1/3)
+assessLS(exprset, method.name=NULL)
+assessMA2(exprset, method.name=NULL)
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{
-    \item{s}{An \code{\link[Biobase]{ExpressionSet-class}} containing
-     expression measures for Affymetrix's spike-in experiment.}
-  \item{exprset}{An \code{\link[Biobase]{ExpressionSet-class}} containing
+    \item{s}{An \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}}
+      containing expression measures for Affymetrix's spike-in experiment.}
+  \item{exprset}{An
+    \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} containing 
      expression measures for Affymetrix's spike-in experiment.}
   \item{method.name}{Name of expression measure being assessed.}
   \item{verbose}{logical. If \code{TRUE} show messages.}

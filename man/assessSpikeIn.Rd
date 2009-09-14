@@ -9,7 +9,7 @@
 \description{
   These functions are assessment functions.
   Each takes an
-  \code{\link[Biobase]{ExpressionSet-class}} and returns a list with necessary
+  \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} and returns a list with necessary
   information to create assessment plots.}
 \usage{
 assessSpikeIn(s,method.name=NULL,verbose=TRUE)
@@ -20,9 +20,11 @@ assessFC(exprset,method.name=NULL)
 assessFC2(exprset,method.name=NULL)
 }
 \arguments{
-    \item{s}{An \code{\link[Biobase]{ExpressionSet-class}} containing
+    \item{s}{An \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}}
+      containing 
      expression measures for Affymetrix's spike-in experiment.}
-  \item{exprset}{An \code{\link[Biobase]{ExpressionSet-class}} containing
+  \item{exprset}{An
+    \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} containing 
      expression measures for Affymetrix's spike-in experiment.}
   \item{method.name}{Name of expression measure being assessed.}
   \item{verbose}{logical. If \code{TRUE} show messages.}

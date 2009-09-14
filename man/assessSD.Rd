@@ -5,17 +5,19 @@
 \description{
   Assessment function for standard deviation estimates.
   Takes a dilution data
-  \code{\link[Biobase]{ExpressionSet-class}} and returns a list with necessary
-  information to create assessment plot.}
+  \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} and returns a
+  list with necessary information to create assessment plot.}
 \usage{
-assessSD(exprset,method.name=NULL,logx=FALSE)
+assessSD(exprset, method.name=NULL, logx=FALSE)
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{
-  \item{exprset}{An \code{\link[Biobase]{ExpressionSet-class}} containing
+  \item{exprset}{An
+    \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} containing 
      expression measures for Affymetrix's spike-in experiment.}
   \item{method.name}{Name of expression measure being assessed.}
-  \item{logx}{Logical. If \code{TRUE} expression is logged for plot. See details.}
+  \item{logx}{Logical. If \code{TRUE} expression is logged for plot. See
+    details.} 
 }
 \details{
   \code{assessSD} does the assessment for Figure 7. This requires the
