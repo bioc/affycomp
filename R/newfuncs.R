@@ -331,8 +331,11 @@ affycomp.figure1b <- function(l,main="Figure 1b",xlim=NULL,ylim=NULL,cex=.85,
     o1 <- fc=="Inf"
     o2 <- fc=="-Inf"
     text(xx[!o1 & !o2],yy[!o1&!o2],fc[!o1 & !o2],col=Colors[colors[!o1 & !o2]])
-    text(xx[o1],yy[o1],expression(infinity),col="black")
-    text(xx[o2],yy[o2],expression(-infinity),col="black")
+    # HJ
+    if(any(o1))
+	text(xx[o1],yy[o1],expression(infinity),col="black")
+    if(any(o2))
+    	text(xx[o2],yy[o2],expression(-infinity),col="black")
 
   }
   else{
@@ -368,8 +371,11 @@ affycomp.figure1b <- function(l,main="Figure 1b",xlim=NULL,ylim=NULL,cex=.85,
       o1 <- fc=="Inf"
       o2 <- fc=="-Inf"
       text(xxx[!o1 & !o2],yyy[!o1 & !o2],fc[!o1 & !o2],col=colors[i],cex=cex)
-      text(xxx[o1],yyy[o1],expression(infinity),col=colors[i],cex=cex)
-      text(xxx[o2],yyy[o2],expression(-infinity),col=colors[i],cex=cex)
+      # HJ
+      if(any(o1))
+      	text(xxx[o1],yyy[o1],expression(infinity),col=colors[i],cex=cex)
+      if(any(o2))
+      	text(xxx[o2],yyy[o2],expression(-infinity),col=colors[i],cex=cex)
     }
     o <- abs(y)>1
     points((x)[o],(y)[o],pch=".",col="red")
