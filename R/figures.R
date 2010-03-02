@@ -107,8 +107,11 @@ affycomp.figure1 <- function(l,main="Figure 1",xlim=NULL,ylim=NULL){
   o1 <- fc=="Inf"
   o2 <- fc=="-Inf"
   text(xx[!o1 & !o2],yy[!o1 & !o2],fc[!o1 & !o2],col=Colors[colors[!o1 & !o2]])
-  text(xx[o1],yy[o1],expression(infinity),col="black")
-  text(xx[o2],yy[o2],expression(-infinity),col="black")
+  # HJ
+  if(any(o1))
+  	text(xx[o1],yy[o1],expression(infinity),col="black")
+  if(any(o2))
+  	text(xx[o2],yy[o2],expression(-infinity),col="black")
 }
 
 
