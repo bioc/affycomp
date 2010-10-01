@@ -1,5 +1,5 @@
 \name{hgu133a.spikein.phenodata}
-\docType{instance}
+\docType{data}
 \alias{hgu133a.spikein.phenodata}
 \title{phenotypic information for HGU133A spike in study}
 \description{

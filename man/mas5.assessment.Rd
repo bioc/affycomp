@@ -1,5 +1,5 @@
 \name{mas5.assessment}
-\docType{instance}
+\docType{data}
 \alias{mas5.assessment}
 \alias{mas5.assessment.133}
 \alias{mas5.assessment2}

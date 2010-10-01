@@ -1,5 +1,5 @@
 \name{spikein.phenodata}
-\docType{instance}
+\docType{data}
 \alias{spikein.phenodata}
 \title{phenotypic information for spike in study}
 \description{

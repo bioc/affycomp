@@ -1,5 +1,5 @@
 \name{hgu133a.spikein.xhyb}
-\docType{instance}
+\docType{data}
 \alias{hgu133a.spikein.xhyb}
 \title{Cross hybridizers}
 \description{Probe Sets likely to crosshybridize to spiked-in probesets in the

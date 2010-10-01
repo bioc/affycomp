@@ -1,5 +1,5 @@
 \name{dilution.phenodata}
-\docType{instance}
+\docType{data}
 \alias{dilution.phenodata}
 \title{Phenotypic Information for Dilution Study}
 \description{

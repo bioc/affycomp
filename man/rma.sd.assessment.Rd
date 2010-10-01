@@ -1,5 +1,5 @@
 \name{rma.sd.assessment}
-\docType{instance}
+\docType{data}
 \alias{rma.sd.assessment}
 \title{An example of the result of an SD assessment}
 \description{

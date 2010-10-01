@@ -1,5 +1,5 @@
 \name{lw.sd.assessment}
-\docType{instance}
+\docType{data}
 \alias{lw.sd.assessment}
 \title{An example of the result of an SD assessment}
 \description{
