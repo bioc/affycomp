@@ -13,7 +13,7 @@ assessDilution(exprset,method.name=NULL)
 \arguments{
   \item{exprset}{An
     \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} containing 
-     expression measures for Affymetrix's spike-in experiment.}
+     expression measures for GeneLogic's dilution experiment.}
   \item{method.name}{Name of expression measure being assessed.}
 }
 \details{

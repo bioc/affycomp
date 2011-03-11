@@ -8,15 +8,14 @@
 \title{An example of the result of the assessments}
 \description{
   The Dilution and both (HGU95 and HGU133) Spike-in cel files were
-  processed with  
-  MAS 5.0 software  and then the
+  processed with Affymetrix MAS 5.0 software, and then the
   functions \code{\link{assessAll}} and \code{\link{assessSpikeIn2}}
   were applied. 
 }
-\usage{data(rma.assessment)
-data(rma.assessment.133)
-data(rma.assessment2)
-data(rma.assessment2.133)
+\usage{data(mas5.assessment)
+data(mas5.assessment.133)
+data(mas5.assessment2)
+data(mas5.assessment2.133)
 }
 \format{A list of list.}
 

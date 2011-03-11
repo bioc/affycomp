@@ -14,7 +14,7 @@
 %- Also NEED an `\alias' for EACH other topic documented here.
 \title{Expression Assessment Table}
 \description{
-  These functions takes as an argument the output of the asessment
+  These functions take as an argument the output of the assessment
   functions.
 }
 \usage{
