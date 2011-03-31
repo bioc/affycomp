@@ -1,7 +1,7 @@
 affycomp <- function(d,s,method.name=NULL,verbose=TRUE,return.it=TRUE){
   if(is.null(method.name)) method.name <- "New expression measure"
   l <- assessAll(d,s,method.name=method.name,verbose=verbose)
-  mas5.assessment <- getData("mas5.assessment")
+  mas5.assessment <- getData("mas5.assessment", package="affycompData")
   affycompPlot(mas5.assessment,l)
   tmp <- affycompTable(mas5.assessment,l)
   print(format(tmp,digits=2))

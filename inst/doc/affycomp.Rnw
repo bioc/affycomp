@@ -2,6 +2,7 @@
 %\VignetteIndexEntry{affycomp primer}
 %\VignetteKeywords{Preprocessing, Affymetrix}
 %\VignetteDepends{Biobase}
+%\VignetteDepends{affycompData}
 %\VignettePackage{affycomp}
 %documentclass[12pt, a4paper]{article}
 \documentclass[12pt]{article}
@@ -28,6 +29,7 @@
 \section{Introduction}
 <<echo=F,results=hide>>=
 library(affycomp)
+library(affycompData)
 @
 
 The defining feature of 
@@ -410,7 +412,7 @@ affycompTable(rma.assessment, mas5.assessment)
 The package also contains a simple tool to assess standard error
 estimates. For this to work the \verb+ExpressionSet+ object used for the
 assessment must have standard error estimates for the dilution data.
-We include two examples in the package.
+We include two examples.
 
 <<>>=
 data(rma.sd.assessment)
