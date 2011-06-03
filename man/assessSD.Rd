@@ -14,17 +14,19 @@ assessSD(exprset, method.name=NULL, logx=FALSE)
 \arguments{
   \item{exprset}{An
     \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} containing 
-     expression measures for Affymetrix's spike-in experiment.}
+     expression measures for Affymetrix's dilution experiment.}
   \item{method.name}{Name of expression measure being assessed.}
-  \item{logx}{Logical. If \code{TRUE} expression is logged for plot. See
-    details.} 
+  \item{logx}{
+  Logical indicating whether the average expression being computed should
+  be logged, default no. See details.
+  } 
 }
 \details{
   \code{assessSD} does the assessment for Figure 7. This requires the
   \code{ExpressionSet} to have standard error estimates for the expression
-  measure. Some expression (such as dChip) will have SEs for the
-  original scale. Others, like RMA will have them for the log scale. For
-  original scales, making \code{logx=TRUE} is recommended.
+  measure. Some expression measures (e.g. dChip) will have SEs in original
+  scale, where others (e.g. RMA) will have them in log scale. For the former,
+  use \code{logx=TRUE}.
 }
 \value{
   Lists with the necessary information to make the Figures.
