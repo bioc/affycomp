@@ -161,11 +161,11 @@ affycomp.figure5b(spikein.assessment.133$FC)
       nominal fold changes equal to 2.}
 \end{figure}
 
-% Fig5cde.Rnw
+% Fig5cde.133.Rnw
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5c(spikein.assessment2$MA2)
+affycomp.figure5c(spikein.assessment2.133$MA2)
 @
 \end{center}
 {Figure 5c) As 5a) but for comparisons with both nominal concentrations at most
@@ -175,7 +175,7 @@ affycomp.figure5c(spikein.assessment2$MA2)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5d(spikein.assessment2$MA2)
+affycomp.figure5d(spikein.assessment2.133$MA2)
 @   
 \end{center}
 {Figure 5d) As 5a) but for comparisons with both nominal concentrations between
@@ -185,13 +185,13 @@ affycomp.figure5d(spikein.assessment2$MA2)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=F,fig=TRUE>>=
-affycomp.figure5e(spikein.assessment2$MA2)
+affycomp.figure5e(spikein.assessment2.133$MA2)
 @
 \end{center}
 {Figure 5e) As 5a) but for comparisons with both nominal concentrations at least
  64 and with nominal fold changes at most 2.}
 \end{figure}
-% end Fig5cde.Rnw
+% end Fig5cde.133.Rnw
 
 \begin{figure}[htbp]
 \begin{center}
