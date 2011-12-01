@@ -57,6 +57,7 @@ the assessment functions described in \code{\link{assessSpikeIn}},
 }
 \author{Rafael A. Irizarry}
 \examples{
+library(affycompData)
 data(rma.assessment)
 data(mas5.assessment)
 affycompPlot(rma.assessment,mas5.assessment)

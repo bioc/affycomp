@@ -66,6 +66,7 @@ Figures are produced.
 \examples{
 %%some examples
 %%the functions not shown in example need another assessment function
+library(affycompData)
 data(rma.assessment)
 affycomp.figure1(rma.assessment$MA)
 affycomp.figure2(rma.assessment$Dilution)

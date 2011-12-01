@@ -70,6 +70,7 @@ tableRanks(...,assessment.list=NULL,method.names=NULL,ngenes=12626,rank=TRUE)
 }
 \author{Rafael A. Irizarry}
 \examples{
+library(affycompData)
 data(rma.assessment) ##this was produced with affycomp.assess
 data(mas5.assessment) ##this one too
 tmp <- affycompTable(mas5.assessment,rma.assessment)
