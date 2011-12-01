@@ -81,6 +81,7 @@ Figures are produced.
 }
 \author{Rafael A. Irizarry}
 \examples{
+library(affycompData)
 data(rma.assessment)
 data(mas5.assessment)
 affycomp.compfig2(list(rma.assessment$Dilution,mas5.assessment$Dilution))

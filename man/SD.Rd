@@ -33,6 +33,7 @@ tableSD(l,method.names=NULL)
 \value{Depends on the call.}
 \author{Rafael A. Irizarry}
 \examples{
+library(affycompData)
 data(rma.sd.assessment) ##this was produced with affycomp.assess
 data(lw.sd.assessment) ##this one too
 affycomp.compfig7(list(rma.sd.assessment,lw.sd.assessment))
