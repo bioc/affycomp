@@ -1,0 +1,17 @@
+*.cache
+*.log
+..Rcheck/
+.DS_Store
+.RData
+.Rhistory
+.Rproj.user
+.Ruserdata
+/Meta/
+/doc/
+*.Rproj
+config.status
+src/*.dll
+src/*.o
+src/*.so
+src/Makevars*
+src/symbols.rds
