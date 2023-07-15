@@ -2,7 +2,7 @@ Package: affycomp
 Version: 1.77.1
 Title: Graphics Toolbox for Assessment of Affymetrix Expression
         Measures
-Author: Rafael A. Irizarry <rafa@jhu.edu> and Zhijin Wu
+Author: Rafael A. Irizarry <rafa@ds.dfci.harvard.edu> and Zhijin Wu
         <zwu@stat.brown.edu> with contributions from Simon Cawley
         <simon_cawley@affymetrix.com>
 Maintainer: Robert D. Shear <rshear@ds.dfci.harvard.edu>
